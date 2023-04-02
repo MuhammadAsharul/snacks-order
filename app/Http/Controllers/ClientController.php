@@ -91,9 +91,8 @@ class ClientController extends Controller
         $shipping_address = ShippingInfo::where('user_id', $userid)->first();
         $cart_items = Cart::where('user_id', $userid)->get();
         foreach ($cart_items as $item) {
-            Order::create([
+            $order = Order::create([
                 'user_id' => $userid,
-                'shipping_infos_id' => $shipping_address->id,
                 'shipping_phonenumber' => $shipping_address->phone_number,
                 'shipping_city' => $shipping_address->city,
                 'shipping_postalcode' => $shipping_address->postal_code,
@@ -101,14 +100,51 @@ class ClientController extends Controller
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity,
                 'total_harga' => $item->price,
-                'invoice' =>  'INV-' . mt_rand(100000, 999999),
-                'status' => 'pending'
+                // 'invoice' =>  'INV-' . mt_rand(100000, 999999),
+                'status' => 'Unpaid'
             ]);
+
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+
+            $orderid = $order->id;
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $orderid,
+                    'gross_amount' => $item->price,
+                ),
+                'customer_details' => array(
+                    'name' => Auth::user()->name,
+                    'phone' => $item->shipping_phonenumber,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+
             $id = $item->id;
             Cart::findOrFail($id)->delete();
         }
-        ShippingInfo::where('user_id', $userid)->first()->delete();
-        return redirect()->route('pendingorders')->with('message', 'Your Order Has Been Placed Succesfully');
+        // ShippingInfo::where('user_id', $userid)->first()->delete();
+        // return redirect()->route('pendingorders')->with('message', 'Your Order Has Been Placed Succesfully');
+        return view('home.pendingorders', compact('snapToken', 'order'));
+    }
+
+    public function Callback(Request $request)
+    {
+        $serverKey = config('midtrans.server_key');
+        $hashed =  hash('sha512', $request->id . $request->status . $request->gross_amount . $serverKey);
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                $order = Order::find($request->id);
+                $order->update(['status' => 'Paid']);
+            }
+        }
     }
     public function UserProfile()
     {

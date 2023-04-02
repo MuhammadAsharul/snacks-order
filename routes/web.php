@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');
         Route::get('/user-proflie/history', 'History')->name('history');
         Route::get('/remove-cart-item/{id}', 'RemoveCartItem')->name('removeitem');
+        
     });
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'Index')->name('pendingorder');

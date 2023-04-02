@@ -50,7 +50,7 @@
                                 <td class="">
                                     <h5>{{ $item->products->name }}</h5>
                                 </td>
-                                <td class="price-col">@currency($item->price)</td>
+                                <td class="price-col">@currency($item->products->price)</td>
                                 <td class="quantity-col">
                                     {{ $item->quantity }}
                                 </td>

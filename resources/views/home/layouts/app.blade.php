@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snack Bu Ning | @yield('title')</title>
+    {{-- if css not load --}}
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
     <link rel="icon" type="image/x-icon" href="{{ asset('dashboard/assets/img/favicon/logo.png') }}" />
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,6 +70,7 @@
     <script src="{{ asset('home/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('home/js/main.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

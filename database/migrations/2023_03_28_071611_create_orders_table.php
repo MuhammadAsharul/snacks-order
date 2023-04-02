@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->unsignedBigInteger('shipping_infos_id');
-            // $table->foreign('shipping_infos_id')->references('id')->on('shipping_infos')->onDelete('cascade');
             $table->string('shipping_phonenumber');
             $table->string('shipping_city');
             $table->string('shipping_postalcode');
@@ -24,8 +22,7 @@ return new class extends Migration
             $table->string('product_id');
             $table->integer('quantity');
             $table->integer('total_harga');
-            $table->string('invoice');
-            $table->string('status')->default('pending');
+            $table->enum('status', ['Unpaid', 'Paid']);
             $table->timestamps();
         });
     }
