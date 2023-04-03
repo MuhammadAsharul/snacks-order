@@ -32,6 +32,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/category', 'AllCategoryPage')->name('allcategory');
     Route::get('/category/{id}/{slug}', 'CategoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'SingleProduct')->name('singleproduct');
+    Route::get('/user-profile', 'UserProfile')->name('userprofile');
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -42,11 +43,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/add-shipping-address', 'AddShippingAddress')->name('addshippingaddress');
         Route::get('/checkout', 'Checkout')->name('checkout');
         Route::post('/place-order', 'PlaceOrder')->name('placeorder');
-        Route::get('/user-profile', 'UserProfile')->name('userprofile');
+        Route::get('/pending-transaction', 'PendingTransaction')->name('pendingtransaction');
+
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');
         Route::get('/user-proflie/history', 'History')->name('history');
         Route::get('/remove-cart-item/{id}', 'RemoveCartItem')->name('removeitem');
-        
     });
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'Index')->name('pendingorder');

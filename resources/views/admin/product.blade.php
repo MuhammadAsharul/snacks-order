@@ -11,6 +11,7 @@
                         <tr>
                             <th>No</th>
                             <th>Product Name</th>
+                            <th>Category</th>
                             <th>Image</th>
                             <th>Price</th>
                             <th>Actions</th>
@@ -21,6 +22,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->name }}</td>
+                                <td>{{ $p->category->name }}</td>
                                 <td>
                                     <img src="{{ asset($p->image) }}" alt="" height="100px">
                                     <br>
@@ -40,6 +42,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {!! $product->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>

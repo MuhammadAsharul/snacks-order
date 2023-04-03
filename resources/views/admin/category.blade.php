@@ -16,7 +16,6 @@
                         <tr>
                             <th>No</th>
                             <th>Category Name</th>
-                            <th>Product</th>
                             <th>Slug</th>
                             <th>Actions</th>
                         </tr>
@@ -26,7 +25,6 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $c->name }}</td>
-                                <td>{{ $c->product_count }}</td>
                                 <td>{{ $c->slug }}</td>
                                 <td>
                                     <a href="{{ route('editcategory', $c->id) }}" class="btn btn-primary">Edit</a>

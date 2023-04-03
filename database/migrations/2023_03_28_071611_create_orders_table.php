@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('total_harga');
             $table->enum('status', ['Unpaid', 'Paid']);
+            $table->string('snapToken')->nullable();
             $table->timestamps();
         });
     }

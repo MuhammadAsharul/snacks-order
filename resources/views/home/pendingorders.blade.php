@@ -26,25 +26,30 @@
                     @php
                         $total = 0;
                     @endphp
-
-                    <tr>
-                        <td class="fw-light">{{ $order->id }}</td>
-                        <td class="fw-light">{{ $order->product->name }}</td>
-                        <td class="fw-light">{{ $order->shipping_phonenumber }}</td>
-                        <td class="fw-light">{{ $order->quantity }} </td>
-                        <td class="fw-light">{{ $order->shipping_address }} </td>
-                        {{-- <td class="fw-light">@currency($order->total_harga) </td> --}}
-                        {{-- <td class="shipping">$10</td>
+                    @forelse ($order as $o)
+                        <tr>
+                            <td class="fw-light">{{ $o->id }}</td>
+                            <td class="fw-light">{{ $o->product->name }}</td>
+                            <td class="fw-light">{{ $o->shipping_phonenumber }}</td>
+                            <td class="fw-light">{{ $o->quantity }} </td>
+                            <td class="fw-light">{{ $o->shipping_address }} </td>
+                            {{-- <td class="fw-light">@currency($o->total_harga) </td> --}}
+                            {{-- <td class="shipping">$10</td>
                         <td class="total-cart-p">$39</td> --}}
-                    </tr>
-                    @php
-                        $total = $total + $order->total_harga;
-                    @endphp
-                    <tr>
-                        <td></td>
-                        <td class="total">Total</td>
-                        <td class="total">@currency($total)</td>
-                    </tr>
+                        </tr>
+                        @php
+                            $total = $total + $o->total_harga;
+                        @endphp
+                        <tr>
+                            <td></td>
+                            <td class="total">Total</td>
+                            <td class="total">@currency($total)</td>
+                        </tr>
+                    @empty
+                        <div class="alert alert-danger">
+                            Data Product belum Tersedia.
+                        </div>
+                    @endforelse
                 </tbody>
             </table>
             <button id="pay-button">Buy Now</button>

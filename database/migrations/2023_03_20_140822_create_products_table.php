@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('short_description');
             $table->text('long_description');
             $table->integer('price');
-            $table->integer('quantity');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('image');

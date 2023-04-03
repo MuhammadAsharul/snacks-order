@@ -126,26 +126,35 @@ class ClientController extends Controller
             );
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-
+            $order = Order::with('product')->where('user_id', $userid)->get();
             $id = $item->id;
             Cart::findOrFail($id)->delete();
         }
-        // ShippingInfo::where('user_id', $userid)->first()->delete();
+        ShippingInfo::where('user_id', $userid)->first()->delete();
         // return redirect()->route('pendingorders')->with('message', 'Your Order Has Been Placed Succesfully');
         return view('home.pendingorders', compact('snapToken', 'order'));
     }
 
+
+    public function PendingTransaction()
+    {
+        $userid = Auth::id();
+        $order = Order::with('product')->where('user_id', $userid)->orWhere('status', 'Unpaid')->get();
+        return view('home.pendingorders', compact('order'));
+    }
     public function Callback(Request $request)
     {
         $serverKey = config('midtrans.server_key');
-        $hashed =  hash('sha512', $request->id . $request->status . $request->gross_amount . $serverKey);
+        $hashed =  hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
         if ($hashed == $request->signature_key) {
             if ($request->transaction_status == 'capture') {
-                $order = Order::find($request->id);
-                $order->update(['status' => 'Paid']);
+                $order = Order::find($request->order_id);
+                $order->update(['status' => 'Paid', 'snapToken' => 'null']);
             }
         }
     }
+
+
     public function UserProfile()
     {
         return view('home.userprofile');

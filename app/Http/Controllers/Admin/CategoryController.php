@@ -28,7 +28,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ];
         Category::create($category);
-        return redirect()->route('category')->with('message', 'Category Added Successfully');
+        return redirect()->route('admincategory')->with('message', 'Category Added Successfully');
     }
 
     public function EditCategory($id)
@@ -48,7 +48,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ];
         Category::findOrFail($category_id)->update($category);
-        return redirect()->route('category')->with('message', 'Category Updated Successfully');
+        return redirect()->route('admincategory')->with('message', 'Category Updated Successfully');
     }
     public function DeleteCategory($id)
     {
