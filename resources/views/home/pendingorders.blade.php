@@ -29,7 +29,7 @@
                     @forelse ($order as $o)
                         <tr>
                             <td class="fw-light">{{ $o->id }}</td>
-                            <td class="fw-light">{{ $o->product->name }}</td>
+                            {{-- <td class="fw-light">{{ $o->product->name }}</td> --}}
                             <td class="fw-light">{{ $o->shipping_phonenumber }}</td>
                             <td class="fw-light">{{ $o->quantity }} </td>
                             <td class="fw-light">{{ $o->shipping_address }} </td>

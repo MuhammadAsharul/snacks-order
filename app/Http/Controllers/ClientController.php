@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderDetails;
 use App\Models\ShippingInfo;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
@@ -98,9 +99,14 @@ class ClientController extends Controller
                 'shipping_postalcode' => $shipping_address->postal_code,
                 'shipping_address' => $shipping_address->address,
                 'total_harga' => $item->price,
+                'invoice' =>  'INV-' . mt_rand(100000, 999999),
                 'status' => 'Unpaid'
             ]);
-
+            $orderDetail = OrderDetails::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity
+            ]);
             // Set your Merchant Server Key
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -109,11 +115,9 @@ class ClientController extends Controller
             \Midtrans\Config::$isSanitized = true;
             // Set 3DS transaction for credit card to true
             \Midtrans\Config::$is3ds = true;
-
-            $orderid = $order->id;
             $params = array(
                 'transaction_details' => array(
-                    'order_id' => $orderid,
+                    'order_id' => $order->invoice,
                     'gross_amount' => $item->price,
                 ),
                 'customer_details' => array(

@@ -40,7 +40,6 @@
                             @php
                                 $total = 0;
                             @endphp
-
                             <tr>
                                 <td class="fw-light">{{ $order->id }}</td>
                                 <td class="fw-light">{{ $order->product->name }}</td>

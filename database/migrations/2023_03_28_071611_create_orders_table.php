@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('shipping_postalcode');
             $table->string('shipping_address');
             $table->integer('total_harga');
+            $table->string('invoice')->unique();
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->string('snapToken')->nullable();
             $table->timestamps();
