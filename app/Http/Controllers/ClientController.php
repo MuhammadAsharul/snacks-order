@@ -97,10 +97,7 @@ class ClientController extends Controller
                 'shipping_city' => $shipping_address->city,
                 'shipping_postalcode' => $shipping_address->postal_code,
                 'shipping_address' => $shipping_address->address,
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
                 'total_harga' => $item->price,
-                // 'invoice' =>  'INV-' . mt_rand(100000, 999999),
                 'status' => 'Unpaid'
             ]);
 
@@ -136,11 +133,17 @@ class ClientController extends Controller
     }
 
 
-    public function PendingTransaction()
+    // public function PendingTransaction()
+    // {
+    //     $userid = Auth::id();
+    //     $order = Order::with('product')->where('user_id', $userid)->orWhere('status', 'Unpaid')->get();
+    //     return view('home.pendingorders', compact('order'));
+    // }
+
+    public function Invoice($id)
     {
-        $userid = Auth::id();
-        $order = Order::with('product')->where('user_id', $userid)->orWhere('status', 'Unpaid')->get();
-        return view('home.pendingorders', compact('order'));
+        $order = Order::find($id);
+        return view('home.invoice', compact('order'));
     }
     public function Callback(Request $request)
     {
@@ -167,7 +170,8 @@ class ClientController extends Controller
     }
     public function History()
     {
-
-        return view('home.history');
+        $userid = Auth::id();
+        $order = Order::with('product')->where('user_id', $userid)->where('status', 'Paid')->get();
+        return view('home.history', compact('order'));
     }
 }

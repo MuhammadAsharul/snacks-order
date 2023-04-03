@@ -43,7 +43,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/add-shipping-address', 'AddShippingAddress')->name('addshippingaddress');
         Route::get('/checkout', 'Checkout')->name('checkout');
         Route::post('/place-order', 'PlaceOrder')->name('placeorder');
-        Route::get('/pending-transaction', 'PendingTransaction')->name('pendingtransaction');
+        // Route::get('/pending-transaction', 'PendingTransaction')->name('pendingtransaction');
+        Route::get('/invoice/{id}', 'Invoice')->name('invoice');
 
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');
         Route::get('/user-proflie/history', 'History')->name('history');
@@ -76,8 +77,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-category', 'UpdateCategory')->name('updatecategory');
         Route::get('/admin/delete-category/{id}', 'DeleteCategory')->name('deletecategory');
     });
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/pending-orders', 'Pending')->name('pendingorder');
+        Route::get('/admin/success-orders', 'Success')->name('successorder');
+        Route::get('/export-pdf', 'ExportSuccess');
+    });
 });
-
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'role:user'])->name('dashboard');

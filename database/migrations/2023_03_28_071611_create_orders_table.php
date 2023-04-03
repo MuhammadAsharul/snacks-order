@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('shipping_city');
             $table->string('shipping_postalcode');
             $table->string('shipping_address');
-            $table->string('product_id');
-            $table->integer('quantity');
             $table->integer('total_harga');
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->string('snapToken')->nullable();

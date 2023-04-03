@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('pendingorder') }}" class="menu-link">
+                    <a href="{{ route('successorder') }}" class="menu-link">
                         <div data-i18n="Basic Inputs">Success Order</div>
                     </a>
                 </li>

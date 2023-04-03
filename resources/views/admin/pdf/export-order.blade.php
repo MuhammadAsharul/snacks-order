@@ -1,6 +1,14 @@
-@extends('admin.layouts.app')
-@section('title', 'Product')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Product</h4>
         <div class="card">
@@ -46,4 +54,6 @@
             </div>
         </div>
     </div>
-@endsection
+</body>
+
+</html>

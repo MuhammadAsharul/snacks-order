@@ -52,7 +52,7 @@
                     @endforelse
                 </tbody>
             </table>
-            <button id="pay-button">Buy Now</button>
+            <button id="pay-button" class="btn btn-primary mt-3">Buy Now</button>
         </div>
     </div>
 @endsection
@@ -65,7 +65,8 @@
             window.snap.pay('{{ $snapToken }}', {
                 onSuccess: function(result) {
                     /* You may add your own implementation here */
-                    alert("payment success!");
+                    // alert("payment success!");
+                    window.location.href = '/invoice/{{ $order->id }}'
                     console.log(result);
                 },
                 onPending: function(result) {

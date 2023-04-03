@@ -3,7 +3,7 @@
 @section('content')
     <div class="container page-add">
         <div class="row d-flex flex-row">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div class="page-breadcrumb">
                     <h2>User Profile<span>.</span></h2><br>
                     <a href="#">Profile</a>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="product-content order-table">
                     @yield('profilecontent')
                 </div>
