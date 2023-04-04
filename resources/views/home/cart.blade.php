@@ -60,13 +60,13 @@
                                 $total = $total + $item->price;
                             @endphp
                         @endforeach
-                        <tr class="alert alert-primary mt-3">
+                        <tr class="mt-3">
                             @if ($total > 0)
                                 <td class="total" colspan="4">Total</td>
-                                <td class="total">@currency($total)</td>
+                                <td class="total" colspan="4">@currency($total)</td>
                             @else
-                                <td>
-                                    <div class=" alert alert-danger">
+                                <td colspan="10">
+                                    <div class="text-center alert alert-danger">
                                         Cart Empty.
                                     </div>
                                 </td>
