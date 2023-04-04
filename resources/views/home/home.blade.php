@@ -31,15 +31,15 @@
                             <h6 class="fw-bold text-decoration-none">{{ $p->name }}</h6>
                             <p>@currency($p->price)</p>
                             {{-- <p>{{ $p->short_description }}</p> --}}
-                            <div class="d-flex justify-content-between mb-3">
-                                <a href="{{ route('singleproduct', [$p->id, $p->slug]) }}" class="btn btn-primary">See
+                            <div class="d-grid gap-2 col-10 mx-auto mb-3">
+                                <a href="{{ route('singleproduct', [$p->id, $p->slug]) }}" class="btn btn-primary ">See
                                     More</a>
-                                <form action="{{ route('addproducttocart') }}" method="POST">
+                                <form action="{{ route('addproducttocart') }}" method="POST" class="text-center">
                                     @csrf
+                                    <input type="number" name="quantity" value="1" min="1">
                                     <input type="hidden" name="product_id" value="{{ $p->id }}">
                                     <input type="hidden" name="price" value="{{ $p->price }}">
-                                    <input type="hidden" name="quantity" value="1">
-                                    <input class="btn btn-warning" type="submit" value="Buy Now">
+                                    <input class="btn btn-warning text-center mt-2 w-100" type="submit" value="Buy Now">
                                 </form>
                             </div>
                         </div>

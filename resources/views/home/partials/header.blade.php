@@ -8,11 +8,12 @@
                 <a href="/"><img src="{{ asset('dashboard/assets/img/favicon/logo.png') }}" alt=""></a>
             </div>
             <div class="header-right">
-                <img src="{{ asset('home/img/icons/search.png') }}" alt="" class="search-trigger">
+
                 <a href="{{ route('userprofile') }}">
                     <img src="{{ asset('home/img/icons/man.png') }}" alt=""></a>
                 <a href="{{ route('addtocart') }}">
                     <img src="{{ asset('home/img/icons/bag.png') }}" alt="">
+                    <span>2</span>
                 </a>
             </div>
 

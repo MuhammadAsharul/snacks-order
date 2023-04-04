@@ -20,7 +20,7 @@
     <!-- Page Add Section End -->
 
     <!-- Cart Page Section Begin -->
-    <div class="cart-page">
+    <div class="cart-page vh-100 vw-50">
         <div class="container">
             <div class="cart-table">
                 @if ($message = Session::get('message'))
@@ -32,10 +32,10 @@
                     <thead>
                         <tr>
                             <th>Product Image</th>
-                            <th class="product-h">Product</th>
+                            <th>Product</th>
                             <th>Price</th>
-                            <th class="quan">Quantity</th>
-                            <th>Action</th>
+                            <th>Quantity</th>
+                            <th width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,32 +54,27 @@
                                 <td class="quantity-col">
                                     {{ $item->quantity }}
                                 </td>
-                                <td class="product-close"><a href="{{ route('removeitem', $item->id) }}"
-                                        class="btn btn-danger">x</a></td>
+                                <td><a href="{{ route('removeitem', $item->id) }}" class="btn btn-danger">x</a></td>
                             </tr>
                             @php
                                 $total = $total + $item->price;
                             @endphp
                         @endforeach
-                        <tr>
-                            <td></td>
-                            <td></td>
+                        <tr class="alert alert-primary mt-3">
                             @if ($total > 0)
-                                <td class="total">Total</td>
-                                <td></td>
+                                <td class="total" colspan="4">Total</td>
                                 <td class="total">@currency($total)</td>
                             @else
                                 <td>
-                                    <h4 style="text-align: center; font-weight: 600; color:red">Empty Cart Item</h4>
+                                    <div class=" alert alert-danger">
+                                        Cart Empty.
+                                    </div>
                                 </td>
-                                <td></td>
-                                <td></td>
                             @endif
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
         <div class="shopping-method">
             <div class="container">

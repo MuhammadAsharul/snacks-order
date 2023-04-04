@@ -80,7 +80,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-orders', 'Pending')->name('pendingorder');
         Route::get('/admin/success-orders', 'Success')->name('successorder');
-        Route::get('/export-pdf', 'ExportSuccess');
+        Route::get('/export-pdf', 'ExportSuccess')->name('exportsuccess');
     });
 });
 // Route::get('/dashboard', function () {

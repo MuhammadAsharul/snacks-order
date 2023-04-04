@@ -81,51 +81,11 @@
                                 <p class="in-name">Note</p>
                             </div>
                             <div class="col-lg-10">
-                                <textarea name="note" id="" cols="100" rows="10"></textarea>
+                                <textarea name="note" id="" cols="35" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Next" class="btn btn-primary">
-                    {{-- <div class="col-lg-3">
-                        <div class="order-table">
-                            <div class="cart-item">
-                                <span>Product</span>
-                                <p class="product-name">Blue Dotted Shirt</p>
-                            </div>
-                            <div class="cart-item">
-                                <span>Price</span>
-                                <p>$29</p>
-                            </div>
-                            <div class="cart-item">
-                                <span>Quantity</span>
-                                <p>1</p>
-                            </div>
-                            <div class="cart-item">
-                                <span>Shipping</span>
-                                <p>$10</p>
-                            </div>
-
-                            <div class="cart-total">
-                                <span>Total</span>
-                                <p>$39</p>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="payment-method">
-                            {{-- <h3>Payment</h3>
-                            <ul>
-                                <li>Paypal <img src="img/paypal.jpg" alt=""></li>
-                                <li>Credit / Debit card <img src="img/mastercard.jpg" alt=""></li>
-                                <li>
-                                    <label for="two">Pay when you get the package</label>
-                                    <input type="radio" id="two">
-                                </li>
-                            </ul> --}}
-                        </div>
-                    </div>
+                    <input type="submit" value="Next" class="btn btn-primary mt-3">
                 </div>
             </form>
         </div>

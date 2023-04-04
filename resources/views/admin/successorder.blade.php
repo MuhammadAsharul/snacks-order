@@ -5,7 +5,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Success Order</h4>
         <div class="card">
             <h5 class="card-header">Order Success Information</h5>
-            <div class="my-2 mx-2"><a class="btn btn-primary" href="/export-pdf">Export PDF</a></div>
+            <div class="my-2 mx-2"><a class="btn btn-primary" href="{{ route('exportsuccess') }}">Export PDF</a></div>
             <div class="table-responsive text-nowrap">
                 @if ($message = Session::get('message'))
                     <div class="mx-2 alert alert-success vw-100">

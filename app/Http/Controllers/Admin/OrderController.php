@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -19,9 +20,10 @@ class OrderController extends Controller
         $success_orders = Order::where('status', 'Paid')->latest()->get();
         return view('admin.successorder', compact('success_orders'));
     }
-    // public function ExportSucess()
-    // {
-    //     $pdf = Pdf::loadView('admin.pdf.export-order', $data);
-    //     return $pdf->download('invoice.pdf');
-    // }
+    public function ExportSucess()
+    {
+        $data = Order::where('status', 'Paid')->latest()->get();
+        $pdf = Pdf::loadView('admin.pdf.export-order', ['data' => $data]);
+        return $pdf->download('export-order' . Carbon::now()->timestamp . '.pdf');
+    }
 }

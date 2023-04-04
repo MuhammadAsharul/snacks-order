@@ -22,7 +22,7 @@ class ClientController extends Controller
             ->orWhereHas('category', function ($query) use ($keyword) {
                 $query->where('name', 'LIKE', '%' . $keyword . '%');
             })
-            ->latest()->get();
+            ->paginate(8);
         return view('home.allcategory', compact('product'));
     }
     public function CategoryPage(Request $request, $id)
@@ -47,12 +47,12 @@ class ClientController extends Controller
     {
         $product_price = $request->price;
         $quantity = $request->quantity;
-        $price = $product_price * $quantity;
+        $total_price = $product_price * $quantity;
         Cart::create([
             'product_id' => $request->product_id,
             'user_id' => Auth::id(),
             'quantity' => $request->quantity,
-            'price' => $price,
+            'price' => $total_price,
         ]);
         return redirect()->route('addtocart')->with('message', 'Your Item added to Cart Successfully');
     }
