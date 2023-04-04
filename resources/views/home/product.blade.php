@@ -45,7 +45,7 @@
                         <div class="pc-meta">
                             <h5>@currency($product->price)</h5>
                         </div>
-                        
+
                         <p style="text-align: justify">{{ $product->long_description }}</p>
                         <p><span class="fw-semibold">Snack Category :</span> {{ $product->category->name }}</p>
                         <form action="{{ route('addproducttocart') }}" method="POST">

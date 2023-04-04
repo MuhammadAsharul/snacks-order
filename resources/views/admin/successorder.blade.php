@@ -8,22 +8,19 @@
             <div class="my-2 mx-2"><a class="btn btn-primary" href="/export-pdf">Export PDF</a></div>
             <div class="table-responsive text-nowrap">
                 @if ($message = Session::get('message'))
-                    <div class="mx-2 alert alert-success">
+                    <div class="mx-2 alert alert-success vw-100">
                         {{ $message }}
                     </div>
                 @endif
-                <table class="table box-border vw-100">
+                <table class="table box-border vw-50">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>User Id</th>
+                            <th> Buyer</th>
                             <th>Invoice</th>
                             <th>Shipping Information</th>
                             <th>Product Id</th>
-                            <th>Quantity</th>
                             <th>Total Paid</th>
-                            <th>Status</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -41,8 +38,6 @@
                                     </ul>
                                 </td>
                                 <td>{{ $so->product->name }}</td>
-                                <td>{{ $so->quantity }}</td>
-                                <td>{{ $so->status }}</td>
                                 <td>@currency($po->total_harga)</td>
                             </tr>
                         @empty

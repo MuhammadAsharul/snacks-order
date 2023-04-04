@@ -50,11 +50,10 @@
 
 
 
-    <section class="latest-products spad">
-        <div class="container">
-            @yield('content')
-        </div>
-    </section>
+
+    <div class="container">
+        @yield('content')
+    </div>
     <!-- Latest Product End -->
 
     <!-- Footer Section Begin -->

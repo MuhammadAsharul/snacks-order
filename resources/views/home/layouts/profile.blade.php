@@ -23,7 +23,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9 min-vh-100 mt-5">
                 <div class="product-content order-table">
                     @yield('profilecontent')
                 </div>

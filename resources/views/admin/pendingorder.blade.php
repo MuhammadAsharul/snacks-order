@@ -11,17 +11,15 @@
                         {{ $message }}
                     </div>
                 @endif
-                <table class="table box-border vw-100">
+                <table class="table box-border vw-50">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>User Id</th>
+                            <th>Buyer</th>
                             <th>Invoice</th>
                             <th>Shipping Information</th>
                             <th>Product Id</th>
-                            <th>Quantity</th>
                             <th>Total Paid</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -38,14 +36,8 @@
                                         <li>{{ $po->shipping_postalcode }}</li>
                                     </ul>
                                 </td>
-                                <td>{{ $po->product->name }}</td>
-                                <td>{{ $po->quantity }}</td>
+                                <td>{{ $po->product_id }}</td>
                                 <td>@currency($po->total_harga)</td>
-                                <td><a href="" class="btn btn-success">Aprrove Now</a></td>
-                                {{-- <td>
-                                    <a href="{{ route('editcategory', $c->id) }}" class="btn btn-primary">Edit</a>
-                                    <a href="{{ route('deletecategory', $c->id) }}" class="btn btn-danger">Delete</a>
-                                </td> --}}
                             </tr>
                         @empty
                             <div class="alert alert-danger">

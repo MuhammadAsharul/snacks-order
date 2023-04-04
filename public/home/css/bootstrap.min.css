@@ -28,7 +28,7 @@
     --bs-gray-700: #495057;
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
-    --bs-primary: #0d6efd;
+    --bs-primary: #22223c;
     --bs-secondary: #6c757d;
     --bs-success: #198754;
     --bs-info: #0dcaf0;
@@ -2802,19 +2802,19 @@ fieldset:disabled .btn {
 }
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #0d6efd;
-    --bs-btn-border-color: #0d6efd;
+    --bs-btn-bg: #22223c;
+    --bs-btn-border-color: #22223c;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0b5ed7;
-    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-hover-bg: #4e4d93;
+    --bs-btn-hover-border-color: #4e4d93;
     --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0a58ca;
-    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-bg: #4e4d93;
+    --bs-btn-active-border-color: #4e4d93;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #0d6efd;
-    --bs-btn-disabled-border-color: #0d6efd;
+    --bs-btn-disabled-bg: #22223c;
+    --bs-btn-disabled-border-color: #22223c;
 }
 .btn-secondary {
     --bs-btn-color: #fff;
@@ -2866,19 +2866,20 @@ fieldset:disabled .btn {
 }
 .btn-warning {
     --bs-btn-color: #000;
-    --bs-btn-bg: #ffc107;
-    --bs-btn-border-color: #ffc107;
+    --bs-btn-bg: #ffab00;
+    --bs-btn-border-color: #ffab00;
     --bs-btn-hover-color: #000;
-    --bs-btn-hover-bg: #ffca2c;
-    --bs-btn-hover-border-color: #ffc720;
+    --bs-btn-hover-bg: #e69a00;
+    --bs-btn-hover-border-color: #e69a00;
     --bs-btn-focus-shadow-rgb: 217, 164, 6;
     --bs-btn-active-color: #000;
-    --bs-btn-active-bg: #ffcd39;
-    --bs-btn-active-border-color: #ffc720;
+    --bs-btn-active-bg: #e69a00;
+    --bs-btn-active-border-color: #e69a00;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #000;
-    --bs-btn-disabled-bg: #ffc107;
-    --bs-btn-disabled-border-color: #ffc107;
+    --bs-btn-disabled-bg: #ffab00;
+    --bs-btn-disabled-border-color: #ffab00;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(255, 171, 0, 0.4);
 }
 .btn-danger {
     --bs-btn-color: #fff;

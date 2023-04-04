@@ -89,7 +89,7 @@
                             <th>Quantity</th>
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
+                    {{-- <tbody class="table-border-bottom-0">
                         @forelse ($trs as $o)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -104,7 +104,7 @@
                                 Data Category belum Tersedia.
                             </div>
                         @endforelse
-                    </tbody>
+                    </tbody> --}}
                 </table>
             </div>
         </div>
