@@ -55,15 +55,15 @@
                     <div>
                         <form action="{{ route('placeorder') }}" method="POST">
                             @csrf
-                            <input type="submit" value="Place Order" class="btn btn-primary mt-3">
+                            <input type="submit" value="Place Order" class="mt-3 btn btn-primary">
                         </form>
                         {{-- <form action="" method="POST">
                             @csrf
-                            <input type="submit" value="Cancel Order" class="btn btn-danger mt-3">
+                            <input type="submit" value="Cancel Order" class="mt-3 btn btn-danger">
                         </form> --}}
                     </div>
                 </div>
-                <div class="col-lg-4 mt-5">
+                <div class="mt-5 col-lg-4">
                     <table class="table">
                         <thead>
                             <tr>

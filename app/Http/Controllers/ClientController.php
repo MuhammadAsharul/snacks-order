@@ -91,49 +91,55 @@ class ClientController extends Controller
         $userid = Auth::id();
         $shipping_address = ShippingInfo::where('user_id', $userid)->first();
         $cart_items = Cart::where('user_id', $userid)->get();
+        $total = 0;
+        foreach ($cart_items as $cart) {
+            $total_price = $cart->price * $cart->quantity;
+            $total += $total_price;
+        }
+        $order = Order::create([
+            'user_id' => $userid,
+            'shipping_phonenumber' => $shipping_address->phone_number,
+            'shipping_city' => $shipping_address->city,
+            'shipping_postalcode' => $shipping_address->postal_code,
+            'shipping_address' => $shipping_address->address,
+            'total_harga' => $total,
+            'invoice' =>  'INV-' . mt_rand(100000, 999999),
+            'status' => 'Unpaid'
+        ]);
         foreach ($cart_items as $item) {
-            $order = Order::create([
-                'user_id' => $userid,
-                'shipping_phonenumber' => $shipping_address->phone_number,
-                'shipping_city' => $shipping_address->city,
-                'shipping_postalcode' => $shipping_address->postal_code,
-                'shipping_address' => $shipping_address->address,
-                'total_harga' => $item->price,
-                'invoice' =>  'INV-' . mt_rand(100000, 999999),
-                'status' => 'Unpaid'
-            ]);
-            $orderDetail = OrderDetails::create([
+            OrderDetails::create([
                 'order_id' => $order->id,
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity
             ]);
-            // Set your Merchant Server Key
-            \Midtrans\Config::$serverKey = config('midtrans.server_key');
-            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-            \Midtrans\Config::$isProduction = false;
-            // Set sanitization on (default)
-            \Midtrans\Config::$isSanitized = true;
-            // Set 3DS transaction for credit card to true
-            \Midtrans\Config::$is3ds = true;
-            $params = array(
-                'transaction_details' => array(
-                    'order_id' => $order->invoice,
-                    'gross_amount' => $item->price,
-                ),
-                'customer_details' => array(
-                    'name' => Auth::user()->name,
-                    'phone' => $item->shipping_phonenumber,
-                ),
-            );
 
-            $snapToken = \Midtrans\Snap::getSnapToken($params);
-            $order = Order::with('orderdetails')->where('user_id', $userid)->get();
             $id = $item->id;
             Cart::findOrFail($id)->delete();
         }
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order->invoice,
+                'gross_amount' => $order->total_harga,
+            ),
+            'customer_details' => array(
+                'name' => Auth::user()->name,
+                'phone' => $item->shipping_phonenumber,
+            ),
+        );
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $order->snapToken = $snapToken;
+        $order->save();
         ShippingInfo::where('user_id', $userid)->first()->delete();
-        // return redirect()->route('pendingorders')->with('message', 'Your Order Has Been Placed Succesfully');
-        return view('home.pendingorders', compact('snapToken', 'order'));
+        return redirect()->route('pendingorders')->with('success', 'Your Order Has Been Placed Succesfully');
     }
 
 
@@ -168,9 +174,8 @@ class ClientController extends Controller
     }
     public function PendingOrders()
     {
-        $pending_orders = Order::where('status', 'pending')->latest()->get();
-
-        return view('home.pendingorders', compact('pending_orders'));
+        $order = Order::with('detail.product')->where('status', 'Unpaid')->get();
+        return view('home.pendingorders', compact('order'));
     }
     public function History()
     {
