@@ -127,7 +127,7 @@ class ClientController extends Controller
             );
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-            $order = Order::with('product')->where('user_id', $userid)->get();
+            $order = Order::with('orderdetails')->where('user_id', $userid)->get();
             $id = $item->id;
             Cart::findOrFail($id)->delete();
         }

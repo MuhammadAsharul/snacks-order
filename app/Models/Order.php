@@ -16,10 +16,10 @@ class Order extends Model
     }
     public function orderdetails()
     {
-        return $this->hasMany(Order::class, 'order_id', 'id');
+        return $this->hasMany(Order::class, 'id', 'order_id');
     }
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
-    }
+    // public function product()
+    // {
+    //     return $this->belongsTo(Product::class, 'product_id', 'id');
+    // }
 }
