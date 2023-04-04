@@ -2,14 +2,12 @@
 @section('title', 'Product')
 @section('content')
     <!-- Page Add Section Begin -->
-    <section class="page-add">
+    <section class="">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="page-breadcrumb">
-                        <h2>Single Product<span>.</span></h2>
-                        <a href="#">Product</a>
-                        <a class="active" href="#">{{ $product->name }}</a>
+                        <h2 class="fw-bold">Single Product<span>.</span></h2>
                     </div>
                 </div>
                 <div class="col-lg-8">
