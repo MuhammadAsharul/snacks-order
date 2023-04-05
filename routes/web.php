@@ -44,7 +44,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/checkout', 'Checkout')->name('checkout');
         Route::post('/place-order', 'PlaceOrder')->name('placeorder');
         // Route::get('/pending-transaction', 'PendingTransaction')->name('pendingtransaction');
-        Route::get('/invoice/{id}', 'Invoice')->name('invoice');
+
 
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');
         Route::get('/user-proflie/history', 'History')->name('history');

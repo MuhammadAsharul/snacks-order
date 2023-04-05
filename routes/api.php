@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 // midtrans
 Route::post('/midtrans-callback', [ClientController::class, 'Callback']);
+Route::get('/invoice', [ClientController::class,  'Invoice']);

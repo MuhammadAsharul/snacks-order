@@ -7,8 +7,8 @@
                 <thead>
                     <tr>
                         <th>Order Id</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
+                        <th>Address</th>
+                        {{-- <th>Price</th> --}}
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -19,8 +19,8 @@
                     @forelse ($order as $o)
                         <tr>
                             <td class="fw-light">{{ $o->id }}</td>
-                            <td class="fw-light">{{ $o->product->name }}</td>
-                            <td class="fw-light">{{ $o->product->price }} </td>
+                            <td class="fw-light">{{ $o->shipping_address }}</td>
+                            {{-- <td class="fw-light">{{ $o->product->price }} </td> --}}
                             <td class="fw-light">@currency($o->total_harga) </td>
                         </tr>
                         @php

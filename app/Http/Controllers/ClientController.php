@@ -180,7 +180,7 @@ class ClientController extends Controller
     public function History()
     {
         $userid = Auth::id();
-        $order = Order::with('product')->where('user_id', $userid)->where('status', 'Paid')->get();
+        $order = Order::where('user_id', $userid)->where('status', 'Unpaid')->get();
         return view('home.history', compact('order'));
     }
 }
