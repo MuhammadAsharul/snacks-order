@@ -161,7 +161,7 @@ class ClientController extends Controller
         $hashed =  hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
         if ($hashed == $request->signature_key) {
             if ($request->transaction_status == 'capture') {
-                $order = Order::find($request->order_id);
+                $order = Order::where('invoice', $request->order_id)->first();
                 $order->update(['status' => 'Paid', 'snapToken' => 'null']);
             }
         }
@@ -174,13 +174,14 @@ class ClientController extends Controller
     }
     public function PendingOrders()
     {
-        $order = Order::with('detail.product')->where('status', 'Unpaid')->get();
+        $order = Order::with('detail')->where('status', 'Unpaid')->get();
         return view('home.pendingorders', compact('order'));
     }
     public function History()
     {
         $userid = Auth::id();
-        $order = Order::where('user_id', $userid)->where('status', 'Unpaid')->get();
+        $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')->get();
+        // dd($order);
         return view('home.history', compact('order'));
     }
 }

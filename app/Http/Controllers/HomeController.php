@@ -12,10 +12,8 @@ class HomeController extends Controller
     public function Index()
     {
         $products = Product::paginate(4);
+        // $topBuy = OrderDetails::with('product')->orderBy('quantity')->get();
         return view('home.home', compact('products'));
-    }
-    public function TopBuy()
-    {
-        $top = OrderDetails::where('product')->max('quantity');
+        // return view('home.home', compact('topBuy'));
     }
 }
