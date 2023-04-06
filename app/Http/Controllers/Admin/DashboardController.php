@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $order = Order::count();
         $category = Category::count();
         $trs = Order::all();
-        return view('admin.dashboard', compact('product', 'user', 'order', 'trs', 'category'));
+        $latest = Order::orderBy('created_at', 'desc')->get();
+        return view('admin.dashboard', compact('product', 'user', 'order', 'trs', 'category', 'latest'));
     }
 }

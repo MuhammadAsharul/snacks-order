@@ -6,9 +6,7 @@
             <table>
                 <thead>
                     <tr>
-                        {{-- <th>Order Id</th> --}}
                         <th>Invoice</th>
-                        <th>Name</th>
                         <th>Product</th>
                         <th>Total</th>
                         <th>Action</th>
@@ -20,12 +18,10 @@
                     @endphp
                     @forelse ($order as $o)
                         <tr>
-                            {{-- <td class="fw-light">{{ $o->id }}</td> --}}
                             <td class="fw-light">{{ $o->invoice }}</td>
-                            <td class="fw-light">{{ Auth::user()->name }}</td>
                             <td class="fw-light">
                                 @foreach ($o->detail as $item)
-                                    {{ $item->product->name }}
+                                    <li> {{ $item->product->name }}</li>
                                 @endforeach
                             </td>
                             {{-- <td class="fw-light">{{ $o->price }} </td> --}}

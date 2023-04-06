@@ -102,6 +102,8 @@ class ClientController extends Controller
             'shipping_city' => $shipping_address->city,
             'shipping_postalcode' => $shipping_address->postal_code,
             'shipping_address' => $shipping_address->address,
+            'shipping_tglpemesanan' => $shipping_address->tgl_pemesanan,
+            'shipping_note' => $shipping_address->note,
             'total_harga' => $total,
             'invoice' =>  'INV-' . mt_rand(100000, 999999),
             'status' => 'Unpaid'

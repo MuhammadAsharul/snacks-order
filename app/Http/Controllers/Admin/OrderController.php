@@ -20,7 +20,7 @@ class OrderController extends Controller
         $success_orders = Order::where('status', 'Paid')->latest()->get();
         return view('admin.successorder', compact('success_orders'));
     }
-    public function ExportSucess()
+    public function ExportSuccess()
     {
         $data = Order::where('status', 'Paid')->latest()->get();
         $pdf = Pdf::loadView('admin.pdf.export-order', ['data' => $data]);

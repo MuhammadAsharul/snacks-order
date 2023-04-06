@@ -5,7 +5,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Success Order</h4>
         <div class="card">
             <h5 class="card-header">Order Success Information</h5>
-            <div class="my-2 mx-2"><a class="btn btn-primary" href="{{ route('exportsuccess') }}">Export PDF</a></div>
+            <div class="my-2 mx-3"><a class="btn btn-primary" href="{{ route('exportsuccess') }}">Export PDF</a></div>
             <div class="table-responsive text-nowrap">
                 @if ($message = Session::get('message'))
                     <div class="mx-2 alert alert-success vw-100">
@@ -19,16 +19,18 @@
                             <th> Buyer</th>
                             <th>Invoice</th>
                             <th>Shipping Information</th>
-                            <th>Product Id</th>
+                            <th>Product Buy</th>
+                            <th>Created At</th>
                             <th>Total Paid</th>
                         </tr>
+
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @forelse ($success_orders as $so)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $so->user->name }}</td>
-                                <td>{{ $so->invoice }}</td>
+                                <td><span style="color:green">{{ $so->invoice }}</span></td>
                                 <td>
                                     <ul>
                                         <li>{{ $so->shipping_address }}</li>
@@ -37,8 +39,21 @@
                                         <li>{{ $so->shipping_postalcode }}</li>
                                     </ul>
                                 </td>
-                                <td>{{ $so->product->name }}</td>
-                                <td>@currency($po->total_harga)</td>
+                                <td>
+                                    @foreach ($so->detail as $item)
+                                        <li>{{ $item->product->name }} </li>
+                                    @endforeach
+                                </td>
+                                <td>{{ $so->created_at->format('d-m-Y') }}</td>
+                                <td>@currency($so->total_harga)</td>
+                            </tr>
+                            <tr>
+                                @php
+                                    $total = 0;
+                                    $total = $total + $so->total_harga;
+                                @endphp
+                                <td colspan="6">Total</td>
+                                <td class="total fw-bold" colspan="4">@currency($total)</td>
                             </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">

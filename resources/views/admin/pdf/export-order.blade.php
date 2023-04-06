@@ -5,8 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title></title>
 </head>
+<style>
+    .table1 {
+        font-family: sans-serif;
+        color: #232323;
+        border-collapse: collapse;
+    }
+
+    .table1 tr th {
+        background: black;
+        color: #fff;
+        font-weight: normal;
+    }
+
+    .table1,
+    th,
+    td {
+        border: 1px solid #999;
+        padding: 8px 20px;
+    }
+</style>
 
 <body>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -14,43 +34,49 @@
         <div class="card">
             <h5 class="card-header">Product Information</h5>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table table-striped table-bordered table1">
                     <thead class="table-light">
                         <tr>
-                            <th>No</th>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                            <th>Actions</th>
+                            <th>Invoice</th>
+                            <th>Shipping Information</th>
+                            <th>Product Buy</th>
+                            <th>Total Paid</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($product as $p)
+                        @forelse ($data as $so)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->name }}</td>
-                                <td>{{ $p->category->name }}</td>
+                                <td><span style="color:green">{{ $so->invoice }}</span></td>
                                 <td>
-                                    <img src="{{ asset($p->image) }}" alt="" height="100px">
-                                    <br>
-                                    <a href="{{ route('editproductimg', $p->id) }}" class="btn btn-warning mt-2">Update
-                                        Image</a>
+                                    <ul>
+                                        <li>{{ $so->shipping_address }}</li>
+                                        <li>{{ $so->shipping_phonenumber }}</li>
+                                        <li>{{ $so->shipping_city }}</li>
+                                        <li>{{ $so->shipping_postalcode }}</li>
+                                    </ul>
                                 </td>
-                                <td>{{ $p->price }}</td>
                                 <td>
-                                    <a href="{{ route('editproduct', $p->id) }}" class="btn btn-primary">Edit</a>
-                                    <a href="{{ route('deleteproduct', $p->id) }}" class="btn btn-danger">Delete</a>
+                                    @foreach ($so->detail as $item)
+                                        <li>{{ $item->product->name }} </li>
+                                    @endforeach
                                 </td>
+                                <td>@currency($so->total_harga)</td>
+                            </tr>
+                            <tr>
+                                @php
+                                    $total = 0;
+                                    $total = $total + $so->total_harga;
+                                @endphp
+                                <td colspan="6">Total</td>
+                                <td class="total fw-bold" colspan="4">@currency($total)</td>
                             </tr>
                         @empty
-                            <div class="alert alert-danger">
-                                Data Product belum Tersedia.
+                            <div class="mx-2 alert alert-danger">
+                                Data Category belum Tersedia.
                             </div>
                         @endforelse
                     </tbody>
                 </table>
-                {!! $product->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>

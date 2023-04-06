@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('shipping_city');
             $table->string('shipping_postalcode');
             $table->string('shipping_address');
+            $table->dateTime('shipping_tglpemesanan');
+            $table->text('shipping_note');
             $table->integer('total_harga');
             $table->string('invoice')->unique();
             $table->enum('status', ['Unpaid', 'Paid']);

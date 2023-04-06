@@ -82,29 +82,37 @@
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>Order Id</th>
+                            <th>Invoice</th>
                             <th>Product Name</th>
                             <th>Price</th>
                             <th>Status</th>
-                            <th>Quantity</th>
+                            <th>Created At</th>
                         </tr>
                     </thead>
-                    {{-- <tbody class="table-border-bottom-0">
-                        @forelse ($trs as $o)
+                    <tbody class="table-border-bottom-0">
+                        @forelse ($latest as $o)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td class="fw-light">{{ $o->id }}</td>
-                                <td class="fw-light">{{ $o->product->name }}</td>
-                                <td class="fw-light">{{ $o->product->price }} </td>
-                                <td class="fw-light">{{ $o->status }}</td>
-                                <td class="fw-light">{{ $o->quantity }} </td>
+                                <td class="fw-light">{{ $o->invoice }}</td>
+                                <td class="fw-light">
+                                    @foreach ($o->detail as $item)
+                                        <li>{{ $item->product->name }} </li>
+                                    @endforeach
+                                </td>
+                                <td class="fw-light">
+                                    @foreach ($o->detail as $item)
+                                        <li>{{ $item->product->price }} </li>
+                                    @endforeach
+                                </td>
+                                <td class="fw-light"><button class="btn btn-success">{{ $o->status }}</button></td>
+                                <td class="fw-light">{{ $o->created_at->format('d-m-Y') }} </td>
                             </tr>
                         @empty
                             <div class="alert alert-danger">
                                 Data Category belum Tersedia.
                             </div>
                         @endforelse
-                    </tbody> --}}
+                    </tbody>
                 </table>
             </div>
         </div>
