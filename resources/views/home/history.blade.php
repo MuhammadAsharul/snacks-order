@@ -9,7 +9,7 @@
                         <th>Invoice</th>
                         <th>Product</th>
                         <th>Total</th>
-                        <th>Action</th>
+                        <th>Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,12 +21,14 @@
                             <td class="fw-light">{{ $o->invoice }}</td>
                             <td class="fw-light">
                                 @foreach ($o->detail as $item)
-                                    <li> {{ $item->product->name }}</li>
+                                    <li style="list-style: none;"> {{ $item->product->name }}</li>
                                 @endforeach
                             </td>
                             {{-- <td class="fw-light">{{ $o->price }} </td> --}}
                             <td class="fw-light">@currency($o->total_harga) </td>
-                            <td class="fw-light">Cetak PDF</td>
+                            <td class="fw-light">
+                                <a class="btn btn-primary" href="{{ route('invoice', $o->id) }}">PDF</a>
+                            </td>
                         </tr>
                         @php
                             $total = $total + $o->total_harga;

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\OrderDetails;
 
 class DashboardController extends Controller
 {
@@ -17,8 +18,9 @@ class DashboardController extends Controller
         $product = Product::count();
         $order = Order::count();
         $category = Category::count();
-        $trs = Order::all();
+        // $trs = Order::all();
+        $total = Order::sum('total_harga');
         $latest = Order::orderBy('created_at', 'desc')->get();
-        return view('admin.dashboard', compact('product', 'user', 'order', 'trs', 'category', 'latest'));
+        return view('admin.dashboard', compact('product', 'user', 'order', 'total', 'category', 'latest'));
     }
 }

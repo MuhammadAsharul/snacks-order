@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use App\Models\OrderDetails;
 use App\Models\ShippingInfo;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -133,7 +135,8 @@ class ClientController extends Controller
                 'gross_amount' => $order->total_harga,
             ),
             'customer_details' => array(
-                'name' => Auth::user()->name,
+                'first_name' => Auth::user()->name,
+                'last_name' => ' ',
                 'phone' => $item->shipping_phonenumber,
             ),
         );
@@ -152,17 +155,12 @@ class ClientController extends Controller
     //     return view('home.pendingorders', compact('order'));
     // }
 
-    public function Invoice($id)
-    {
-        $order = Order::find($id);
-        return view('home.invoice', compact('order'));
-    }
     public function Callback(Request $request)
     {
         $serverKey = config('midtrans.server_key');
         $hashed =  hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
         if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'capture') {
+            if ($request->transaction_status == 'capture' or $request->transaction_status == 'settlement') {
                 $order = Order::where('invoice', $request->order_id)->first();
                 $order->update(['status' => 'Paid', 'snapToken' => 'null']);
             }
@@ -185,5 +183,12 @@ class ClientController extends Controller
         $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')->get();
         // dd($order);
         return view('home.history', compact('order'));
+    }
+
+    public function Invoice($id)
+    {
+        $data = Order::find($id);
+        $pdf = Pdf::loadView('home.invoice', ['data' => $data]);
+        return $pdf->download('invoice' . Carbon::now()->timestamp . '.pdf');
     }
 }

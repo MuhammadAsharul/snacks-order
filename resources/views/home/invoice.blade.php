@@ -1,71 +1,146 @@
-@extends('home.layouts.app')
-@section('title', 'Checkout')
-@section('content')
-    <!-- Page Add Section Begin -->
-    <section class="page-add">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="page-breadcrumb">
-                        <h2>Invoice<span>.</span></h2>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <img src="img/add.jpg" alt="">
-                </div>
-            </div>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            /* margin: 0 0 20px; */
+
+
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-height: 100px;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .details label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .details p {
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header" style="margin-top: 20px; ">
+            <h1 style="text-align: center;">Invoice</h1>
         </div>
-    </section>
-    <!-- Page Add Section End -->
-    <!-- Cart Total Page Begin -->
-    <section class="cart-total-page spad">
-        <div class="container">
-            <div class="total-info">
-                <div class="total-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order Id</th>
-                                <th>Product Name</th>
-                                <th>Address</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                {{-- <th>Shipping</th>
-                            <th class="total-cart">Total Cart</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $total = 0;
-                            @endphp
-                            <tr>
-                                <td class="fw-light">{{ $order->id }}</td>
-                                <td class="fw-light">{{ $order->product->name }}</td>
-                                <td class="fw-light">{{ $order->shipping_address }} </td>
-                                <td class="fw-light">{{ $order->product->price }} </td>
-                                <td class="fw-light">{{ $order->status }}</td>
-                                <td class="fw-light">{{ $order->quantity }} </td>
-                                <td class="fw-light">@currency($order->total_harga) </td>
-                                {{-- <td class="shipping">$10</td>
-                            <td class="total-cart-p">$39</td> --}}
-                            </tr>
-                            @php
-                                $total = $total + $order->total_harga;
-                            @endphp
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="total-cart">Total</td>
-                                <td class="total-cart-p">@currency($total)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="details">
+            Karanggeneng, Boyolali<br>
+            Boyolali, 57312<br>
+            Phone: 085702363509<br>
+            Email: snackbuning@gmail.com</p>
         </div>
-    </section>
-    <!-- Cart Total Page End -->
-@endsection
+        <table>
+            {{-- @foreach ($data as $item) --}}
+            <tr>
+                <td>Invoice</td>
+                <td>{{ $data->invoice }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ Auth::user()->name }}</td>
+            </tr>
+            <tr>
+                <td>Product</td>
+                <td>
+                    @foreach ($data->detail as $pr)
+                        <li style="list-style: none;">{{ $pr->product->name }}</li>
+                    @endforeach
+                </td>
+            </tr>
+            <tr>
+                <td>Shipping Information</td>
+                <td>
+                    <li style="list-style-type: none">{{ $data->shipping_address }}</li>
+                    <li style="list-style-type: none">{{ $data->shipping_tglpemesanan }}</li>
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    @foreach ($data->detail as $pr)
+                        <li style="list-style: none;">{{ $pr->product->price }} X
+                            {{ $pr->quantity }}
+                        </li>
+                    @endforeach
+                </td>
+            </tr>
+
+            {{-- @endforeach --}}
+        </table>
+        <div class="total">
+            Total: @currency($data->total_harga)
+        </div>
+    </div>
+</body>
+
+</html>

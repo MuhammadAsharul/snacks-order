@@ -33,6 +33,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'CategoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'SingleProduct')->name('singleproduct');
     Route::get('/user-profile', 'UserProfile')->name('userprofile');
+    Route::get('/invoice/{id}', 'Invoice')->name('invoice');
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {

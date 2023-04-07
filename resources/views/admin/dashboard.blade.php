@@ -32,7 +32,7 @@
                                         alt="Credit Card" class="rounded" />
                                 </div>
                             </div>
-                            <span>Category Snack</span>
+                            <span class="fw-semibold d-block mb-1">Category Snack</span>
                             <h3 class="card-title text-nowrap mb-1">{{ $category }}</h3>
                             {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                         </div>
@@ -66,8 +66,8 @@
                                         alt="Credit Card" class="rounded" />
                                 </div>
                             </div>
-                            <span>Order</span>
-                            <h3 class="card-title text-nowrap mb-1">{{ $order }}</h3>
+                            <span class="fw-semibold d-block mb-1">Order Total</span>
+                            <h3 class="card-title  mb-2">@currency($total)</h3>
                             {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                         </div>
                     </div>
@@ -96,12 +96,12 @@
                                 <td class="fw-light">{{ $o->invoice }}</td>
                                 <td class="fw-light">
                                     @foreach ($o->detail as $item)
-                                        <li>{{ $item->product->name }} </li>
+                                        <li style="list-style-type: none">{{ $item->product->name }} </li>
                                     @endforeach
                                 </td>
                                 <td class="fw-light">
                                     @foreach ($o->detail as $item)
-                                        <li>{{ $item->product->price }} </li>
+                                        <li style="list-style-type: none">{{ $item->product->price }} </li>
                                     @endforeach
                                 </td>
                                 <td class="fw-light"><button class="btn btn-success">{{ $o->status }}</button></td>
