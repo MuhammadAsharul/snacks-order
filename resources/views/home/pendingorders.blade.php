@@ -44,7 +44,8 @@
                             <td class="total">Total</td>
                             <td class="total">@currency($total)</td>
                             <td>
-                                <button class="pay-button btn btn-primary" data-snap-token="{{ $o->snapToken }}" data-order-id="{{ $o->id }}">Pay now</button>
+                                <button class="pay-button btn btn-primary" data-snap-token="{{ $o->snapToken }}"
+                                    data-order-id="{{ $o->id }}">Pay now</button>
                             </td>
                         </tr>
                     @empty

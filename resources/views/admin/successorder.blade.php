@@ -47,14 +47,6 @@
                                 <td>{{ $so->created_at->format('d-m-Y') }}</td>
                                 <td>@currency($so->total_harga)</td>
                             </tr>
-                            <tr>
-                                @php
-                                    $total = 0;
-                                    $total = $total + $so->total_harga;
-                                @endphp
-                                <td colspan="6">Total</td>
-                                <td class="total fw-bold" colspan="4">@currency($total)</td>
-                            </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">
                                 Data Category belum Tersedia.

@@ -24,8 +24,6 @@
             font-size: 28px;
             font-weight: bold;
             /* margin: 0 0 20px; */
-
-
         }
 
         .header {
@@ -100,9 +98,8 @@
             Email: snackbuning@gmail.com</p>
         </div>
         <table>
-            {{-- @foreach ($data as $item) --}}
             <tr>
-                <td>Invoice</td>
+                <td>No Invoice</td>
                 <td>{{ $data->invoice }}</td>
             </tr>
             <tr>
@@ -129,16 +126,21 @@
                 <td>
                     @foreach ($data->detail as $pr)
                         <li style="list-style: none;">{{ $pr->product->price }} X
-                            {{ $pr->quantity }}
+                            {{ $pr->quantity }} = {{ $pr->product->price * $pr->quantity }}
                         </li>
                     @endforeach
                 </td>
             </tr>
-
-            {{-- @endforeach --}}
         </table>
         <div class="total">
-            Total: @currency($data->total_harga)
+            @php
+                $total_harga = 0;
+                $total_harga += $pr->product->price * $pr->quantity;
+            @endphp
+            @foreach ($data->detail as $pr)
+                {{ $pr->total_harga }}
+            @endforeach
+            Total: <span style="color: green">@currency($data->total_harga)</span>
         </div>
     </div>
 </body>

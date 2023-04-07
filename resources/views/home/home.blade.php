@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" id="product-list">
+            {{-- <div class="row" id="product-list">
                 @foreach ($products as $p)
                     <div class="col-lg-3 col-sm-6 mix all dresses bags">
                         <div class="single-product-item">
@@ -32,6 +32,31 @@
                                     <input type="number" name="quantity" value="1" min="1">
                                     <input type="hidden" name="product_id" value="{{ $p->id }}">
                                     <input type="hidden" name="price" value="{{ $p->price }}">
+                                    <input class="btn btn-warning text-center mt-2 w-100" type="submit" value="Buy Now">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div> --}}
+            <div class="row" id="product-list">
+                @foreach ($topSeller as $p)
+                    <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                        <div class="single-product-item">
+                            <figure>
+                                <a href=""><img src="{{ $p->product->image }}" alt=""></a>
+                            </figure>
+                            <h6 class="fw-bold text-decoration-none">{{ $p->product->name }}</h6>
+                            <p>@currency($p->product->price)</p>
+                            <div class="d-grid gap-2 col-10 mx-auto mb-3">
+                                <a href="{{ route('singleproduct', [$p->product->id, $p->product->slug]) }}"
+                                    class="btn btn-primary ">See
+                                    More</a>
+                                <form action="{{ route('addproducttocart') }}" method="POST" class="text-center">
+                                    @csrf
+                                    <input type="number" name="quantity" value="1" min="1">
+                                    <input type="hidden" name="product_id" value="{{ $p->product->id }}">
+                                    <input type="hidden" name="price" value="{{ $p->product->price }}">
                                     <input class="btn btn-warning text-center mt-2 w-100" type="submit" value="Buy Now">
                                 </form>
                             </div>
