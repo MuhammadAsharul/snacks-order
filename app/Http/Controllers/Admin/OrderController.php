@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function Pending()
     {
-        $pending_orders = Order::where('status', 'Unpaid')->latest()->get();
+        $pending_orders = Order::where('status', 'Unpaid')->where('status_pemesanan', 'menunggu')->latest()->get();
         return view('admin.pendingorder', compact('pending_orders'));
     }
     public function Success()
@@ -20,6 +20,25 @@ class OrderController extends Controller
         $success_orders = Order::where('status', 'Paid')->latest()->get();
         return view('admin.successorder', compact('success_orders'));
     }
+    public function EditStatus($id)
+    {
+        $editstatus = Order::findOrFail($id);
+        return view('admin.editstatus', compact('editstatus'));
+    }
+    public function UpdateStatus(Request $request)
+    {
+        $order = $request->order_id;
+        $request->validate([
+            'status_pemesanan' => 'required',
+        ]);
+        $status = [
+            'status_pemesanan' => $request->status_pemesanan,
+        ];
+        Order::findOrFail($order)->update($status);
+        return redirect()->route('successorder')->with('message', 'Order Updated Successfully');
+    }
+
+
     public function ExportSuccess()
     {
         $data = Order::where('status', 'Paid')->latest()->get();

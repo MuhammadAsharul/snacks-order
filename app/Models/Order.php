@@ -9,7 +9,7 @@ class Order extends Model
 {
     // protected $dateFormat = 'U';
     use HasFactory;
-    protected $fillable = ['user_id', 'shipping_phonenumber', 'shipping_city', 'shipping_postalcode', 'shipping_address', 'shipping_tglpemesanan', 'shipping_note', 'total_harga', 'invoice', 'status'];
+    protected $fillable = ['user_id', 'shipping_phonenumber', 'shipping_city', 'shipping_postalcode', 'shipping_address', 'shipping_tglpemesanan', 'status_pemesanan', 'shipping_note', 'total_harga', 'invoice', 'status'];
 
     public function user()
     {

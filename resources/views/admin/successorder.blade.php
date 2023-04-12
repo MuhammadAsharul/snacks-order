@@ -18,12 +18,11 @@
                             <th>No</th>
                             <th> Buyer</th>
                             <th>Invoice</th>
-                            <th>Shipping Information</th>
                             <th>Product Buy</th>
                             <th>Created At</th>
-                            <th>Total Paid</th>
+                            <th>Status Pemesanan</th>
+                            <th>Action</th>
                         </tr>
-
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @forelse ($success_orders as $so)
@@ -32,24 +31,20 @@
                                 <td>{{ $so->user->name }}</td>
                                 <td><span style="color:green">{{ $so->invoice }}</span></td>
                                 <td>
-                                    <ul>
-                                        <li>{{ $so->shipping_address }}</li>
-                                        <li>{{ $so->shipping_phonenumber }}</li>
-                                        <li>{{ $so->shipping_city }}</li>
-                                        <li>{{ $so->shipping_postalcode }}</li>
-                                    </ul>
-                                </td>
-                                <td>
                                     @foreach ($so->detail as $item)
                                         <li>{{ $item->product->name }} </li>
                                     @endforeach
                                 </td>
                                 <td>{{ $so->created_at->format('d-m-Y') }}</td>
                                 <td>@currency($so->total_harga)</td>
+                                <td>{{ $so->status_pemesanan }}</td>
+                                <td>
+                                    <a href="{{ route('editstatus', $so->id) }}" class="btn btn-primary">Edit</a>
+                                </td>
                             </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">
-                                Data Category belum Tersedia.
+                                Data Status belum Tersedia.
                             </div>
                         @endforelse
                     </tbody>

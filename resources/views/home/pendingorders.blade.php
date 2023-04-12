@@ -23,9 +23,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
+                    {{-- @php
                         $total = 0;
-                    @endphp
+                    @endphp --}}
                     @forelse ($order as $o)
                         @foreach ($o->detail as $detail)
                             <tr>
@@ -36,13 +36,13 @@
                                 <td class="fw-light">{{ $o->shipping_address }} </td>
                             </tr>
                         @endforeach
-                        @php
-                            $total = $total + $o->total_harga;
-                        @endphp
+                        {{-- @php
+                            $total = $o->total_harga;
+                        @endphp --}}
                         <tr>
                             <td></td>
                             <td class="total">Total</td>
-                            <td class="total">@currency($total)</td>
+                            <td class="total">@currency($o->total_harga)</td>
                             <td>
                                 <button class="pay-button btn btn-primary" data-snap-token="{{ $o->snapToken }}"
                                     data-order-id="{{ $o->id }}">Pay now</button>

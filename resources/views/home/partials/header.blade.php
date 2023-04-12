@@ -13,7 +13,7 @@
                     <img src="{{ asset('home/img/icons/man.png') }}" alt=""></a>
                 <a href="{{ route('addtocart') }}">
                     <img src="{{ asset('home/img/icons/bag.png') }}" alt="">
-                    <span>2</span>
+                    {{-- <span>2</span> --}}
                 </a>
             </div>
 

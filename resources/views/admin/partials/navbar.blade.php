@@ -56,7 +56,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
+                        <a class="dropdown-item" href="">
                             <form action="/logout" method="POST">
                                 @csrf
                                 <button class="btn btn-dange">Logout</button>

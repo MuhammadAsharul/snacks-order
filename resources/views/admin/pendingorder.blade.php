@@ -36,7 +36,11 @@
                                         <li>{{ $po->shipping_postalcode }}</li>
                                     </ul>
                                 </td>
-                                <td>{{ $po->product_id }}</td>
+                                <td>
+                                    @foreach ($po->detail as $item)
+                                        <li>{{ $item->product->name }} </li>
+                                    @endforeach
+                                </td>
                                 <td>@currency($po->total_harga)</td>
                             </tr>
                         @empty

@@ -94,10 +94,10 @@ class ClientController extends Controller
         $shipping_address = ShippingInfo::where('user_id', $userid)->first();
         $cart_items = Cart::where('user_id', $userid)->get();
         $total = 0;
-        // foreach ($cart_items as $cart) {
-        //     $total_price = $cart->price * $cart->quantity;
-        //     $total += $total_price;
-        // }
+        foreach ($cart_items as $cart) {
+            $total_price = $cart->price;
+            $total += $total_price;
+        }
         $order = Order::create([
             'user_id' => $userid,
             'shipping_phonenumber' => $shipping_address->phone_number,
@@ -108,6 +108,7 @@ class ClientController extends Controller
             'shipping_note' => $shipping_address->note,
             'total_harga' => $total,
             'invoice' =>  'INV-' . mt_rand(100000, 999999),
+            'status_pemesanan' => 'Menunggu Konfirmasi',
             'status' => 'Unpaid'
         ]);
         foreach ($cart_items as $item) {

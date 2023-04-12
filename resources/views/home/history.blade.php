@@ -8,6 +8,7 @@
                     <tr>
                         <th>Invoice</th>
                         <th>Product</th>
+                        <th>Status Pesanan</th>
                         <th>Total</th>
                         <th>Invoice</th>
                     </tr>
@@ -24,6 +25,7 @@
                                     <li style="list-style: none;"> {{ $item->product->name }}</li>
                                 @endforeach
                             </td>
+                            <td>{{ $o->status_pemesanan }}</td>
                             {{-- <td class="fw-light">{{ $o->price }} </td> --}}
                             <td class="fw-light">@currency($o->total_harga) </td>
                             <td class="fw-light">

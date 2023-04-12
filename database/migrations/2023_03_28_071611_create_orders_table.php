@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('shipping_note');
             $table->integer('total_harga');
             $table->string('invoice')->unique();
+            $table->string('status_pemesanan');
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->string('snapToken')->nullable();
             $table->timestamps();
