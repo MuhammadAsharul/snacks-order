@@ -50,7 +50,7 @@
                         </tr>
                     @empty
                         <div class="alert alert-danger">
-                            Data Product belum Tersedia.
+                            Data Order belum Tersedia.
                         </div>
                     @endforelse
                 </tbody>
