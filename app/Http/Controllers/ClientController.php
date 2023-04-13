@@ -181,7 +181,8 @@ class ClientController extends Controller
     public function History()
     {
         $userid = Auth::id();
-        $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')->get();
+        $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')->where('status_pemesanan', 'diproses')
+            ->orWhere('status_pemesanan', 'dikirim')->where('status_pemesanan', 'sampai')->get();
         // dd($order);
         return view('home.history', compact('order'));
     }

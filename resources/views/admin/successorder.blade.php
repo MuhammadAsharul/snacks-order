@@ -20,8 +20,8 @@
                             <th>Invoice</th>
                             <th>Product Buy</th>
                             <th>Created At</th>
+                            <th>Total Buy</th>
                             <th>Status Pemesanan</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -38,9 +38,6 @@
                                 <td>{{ $so->created_at->format('d-m-Y') }}</td>
                                 <td>@currency($so->total_harga)</td>
                                 <td>{{ $so->status_pemesanan }}</td>
-                                <td>
-                                    <a href="{{ route('editstatus', $so->id) }}" class="btn btn-primary">Edit</a>
-                                </td>
                             </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">

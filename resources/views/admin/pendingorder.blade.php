@@ -17,9 +17,10 @@
                             <th>No</th>
                             <th>Buyer</th>
                             <th>Invoice</th>
-                            <th>Shipping Information</th>
                             <th>Product Id</th>
                             <th>Total Paid</th>
+                            <th>Status Pemesanan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -29,19 +30,15 @@
                                 <td>{{ $po->user->name }}</td>
                                 <td>{{ $po->invoice }}</td>
                                 <td>
-                                    <ul>
-                                        <li>{{ $po->shipping_address }}</li>
-                                        <li>{{ $po->shipping_phonenumber }}</li>
-                                        <li>{{ $po->shipping_city }}</li>
-                                        <li>{{ $po->shipping_postalcode }}</li>
-                                    </ul>
-                                </td>
-                                <td>
                                     @foreach ($po->detail as $item)
                                         <li>{{ $item->product->name }} </li>
                                     @endforeach
                                 </td>
                                 <td>@currency($po->total_harga)</td>
+                                <td>{{ $po->status_pemesanan }}</td>
+                                <td>
+                                    <a href="{{ route('editstatus', $po->id) }}" class="btn btn-primary">Edit</a>
+                                </td>
                             </tr>
                         @empty
                             <div class="alert alert-danger">
