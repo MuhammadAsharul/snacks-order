@@ -22,20 +22,25 @@
                     @if (Route::has('login'))
                         @auth
                             <li><a href="/">Home</a></li>
-                            <li><a href="">Category</a>
+                            <li><a href="">Product</a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('allcategory') }}">All Category</a></li>
+                                    <li><a href="{{ route('allcategory') }}">All Product</a></li>
                                     @foreach ($categories as $c)
                                         <li><a href="{{ route('category', [$c->id, $c->slug]) }}">Snack
                                                 {{ $c->name }}</a>
                                         </li>
                                     @endforeach
+
                                 </ul>
-                            </li>
-                        @else
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @endauth
+                                @if (Auth::user()->name == 'Admin')
+                            <li><a href="{{ route('admindashboard') }}">Admin</a></li>
+                        @endif
+                        </li>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('allcategory') }}">All Product</a></li>
+                    @endauth
                     @endif
                 </ul>
             </nav>

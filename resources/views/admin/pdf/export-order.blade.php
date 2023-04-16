@@ -12,6 +12,7 @@
         font-family: sans-serif;
         color: #232323;
         border-collapse: collapse;
+        width: 100%
     }
 
     .table1 tr th {
@@ -20,19 +21,34 @@
         font-weight: normal;
     }
 
+    .details {
+        margin-left: 30px;
+    }
+
+    li {
+        list-style-type: none
+    }
+
     .table1,
     th,
     td {
         border: 1px solid #999;
-        padding: 8px 20px;
+        padding: 8px 10px;
     }
 </style>
 
 <body>
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Product</h4>
+        <div class="header" style="margin-top: 20px; ">
+            <h1 style="text-align: center;">Rekap Penjualan</h1>
+        </div>
+        <div class="details">
+            Karanggeneng, Boyolali<br>
+            Boyolali, 57312<br>
+            Phone: 085702363509<br>
+            Email: snackbuning@gmail.com</p>
+        </div>
         <div class="card">
-            <h5 class="card-header">Product Information</h5>
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped table-bordered table1">
                     <thead class="table-light">
@@ -44,7 +60,10 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($data as $so)
+                        @php
+                            $total = 0;
+                        @endphp
+                        @forelse ($penj as $so)
                             <tr>
                                 <td><span style="color:green">{{ $so->invoice }}</span></td>
                                 <td>
@@ -61,17 +80,27 @@
                                     @endforeach
                                 </td>
                                 <td>@currency($so->total_harga)</td>
+                                @php
+                                    $total = $total + $so->total_harga;
+                                @endphp
                             </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">
                                 Data Category belum Tersedia.
                             </div>
                         @endforelse
+                        <tr>
+                            <td colspan="2">Total</td>
+                            <td colspan="2">@currency($total)</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        window.print();
+    </script>
 </body>
 
 </html>

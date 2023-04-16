@@ -136,7 +136,6 @@
                 <td>{{ $data->status_pemesanan }}</td>
             </tr>
         </table>
-        <p>Keterangan : Total Biaya belum termasuk biaya ongkir</p>
         <div class="total">
             @php
                 $total_harga = 0;

@@ -1,16 +1,17 @@
 @extends('home.layouts.app')
-@section('title', 'Products')
+@section('title', 'Home')
 @section('content')
     @include('home.partials.banner')
     @include('home.partials.feature')
 
     <section class="latest-products spad">
+
         <div class="container">
             <div class="product-filter">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
-                            <h2>Latest Products</h2>
+                            <h2>Top Seller</h2>
                         </div>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                 @endforeach
             </div> --}}
             <div class="row" id="product-list">
-                @foreach ($topSeller as $p)
+                @foreach ($top as $p)
                     <div class="col-lg-3 col-sm-6 mix all dresses bags">
                         <div class="single-product-item">
                             <figure>

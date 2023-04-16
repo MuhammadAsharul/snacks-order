@@ -96,6 +96,27 @@
                         <div data-i18n="Basic Inputs">Success Order</div>
                     </a>
                 </li>
+
+            </ul>
+        </li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Rekap</span></li>
+        <!-- Forms -->
+        <li class="menu-item {{ request()->is('admin/order') ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Form Elements">Rekap</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('cetak-order-form') }}" class="menu-link">
+                        <div data-i18n="Basic Inputs">Cetak Rekap Penjualan</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('cetak-product-form') }}" class="menu-link">
+                        <div data-i18n="Basic Inputs">Cetak Rekap Product</div>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

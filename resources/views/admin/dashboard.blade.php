@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="card">
-            <h5 class="card-header">Latest Order</h5>
+            <h5 class="card-header  fw-bold">Latest Order</h5>
             <div class="table-responsive text-nowrap">
 
                 <table class="table">
@@ -83,9 +83,10 @@
                         <tr>
                             <th>No</th>
                             <th>Invoice</th>
+                            <th>Buyer</th>
                             <th>Product Name</th>
                             <th>Price</th>
-                            <th>Status</th>
+                            <th>Total</th>
                             <th>Created At</th>
                         </tr>
                     </thead>
@@ -94,6 +95,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-light">{{ $o->invoice }}</td>
+                                <td>{{ $o->user->name }}</td>
                                 <td class="fw-light">
                                     @foreach ($o->detail as $item)
                                         <li style="list-style-type: none">{{ $item->product->name }} </li>
@@ -101,15 +103,44 @@
                                 </td>
                                 <td class="fw-light">
                                     @foreach ($o->detail as $item)
-                                        <li style="list-style-type: none">{{ $item->product->price }} </li>
+                                        <li style="list-style-type: none">{{ $item->product->price }} X
+                                            {{ $item->quantity }}</li>
                                     @endforeach
                                 </td>
-                                <td class="fw-light"><button class="btn btn-success">{{ $o->status }}</button></td>
+                                <td>@currency($o->total_harga)</td>
                                 <td class="fw-light">{{ $o->created_at->format('d-m-Y') }} </td>
                             </tr>
                         @empty
                             <div class="alert alert-danger">
                                 Data Category belum Tersedia.
+                            </div>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <h5 class="card-header fw-bold">Product Top Seller</h5>
+            <div class="table-responsive text-nowrap">
+
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @forelse ($top as $t)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $t->product->name }}</td>
+                                <td>{{ $t->total_quantity }}</td>
+                            </tr>
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Produk Terbanyak belum Tersedia.
                             </div>
                         @endforelse
                     </tbody>

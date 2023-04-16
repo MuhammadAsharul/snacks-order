@@ -52,6 +52,10 @@
 
 
     <div class="container">
+        <marquee behavior="" direction="left" style="background-color: #22223c;"><span
+                style="color:white;text-transform: uppercase">Pemesanan
+                Hanya Dilayani Untuk Wilayah Boyolali Kota</span>
+        </marquee>
         @yield('content')
     </div>
     <!-- Latest Product End -->

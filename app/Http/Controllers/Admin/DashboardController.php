@@ -20,7 +20,11 @@ class DashboardController extends Controller
         $category = Category::count();
         // $trs = Order::all();
         $total = Order::sum('total_harga');
-        $latest = Order::orderBy('created_at', 'desc')->get();
-        return view('admin.dashboard', compact('product', 'user', 'order', 'total', 'category', 'latest'));
+        $latest = Order::with('user', 'detail')->where('status', 'Paid')->orderBy('created_at', 'desc')->get();
+        $top = OrderDetails::with('product')->groupBy('product_id')
+            ->selectRaw('product_id, SUM(quantity) as total_quantity')
+            ->orderByDesc('total_quantity')
+            ->get();
+        return view('admin.dashboard', compact('product', 'user', 'order', 'total', 'category', 'latest', 'top'));
     }
 }

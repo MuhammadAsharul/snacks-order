@@ -108,7 +108,7 @@ class ClientController extends Controller
             'shipping_note' => $shipping_address->note,
             'total_harga' => $total,
             'invoice' =>  'INV-' . mt_rand(100000, 999999),
-            'status_pemesanan' => 'Menunggu Konfirmasi',
+            'status_pemesanan' => 'menunggu',
             'status' => 'Unpaid'
         ]);
         foreach ($cart_items as $item) {
@@ -175,14 +175,14 @@ class ClientController extends Controller
     }
     public function PendingOrders()
     {
-        $order = Order::with('detail')->where('status_pemesanan', 'menunggu')->get();
+        $order = Order::with('detail')->where('status', 'Unpaid')->get();
         return view('home.pendingorders', compact('order'));
     }
     public function History()
     {
         $userid = Auth::id();
-        $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')->where('status_pemesanan', 'diproses')
-            ->orWhere('status_pemesanan', 'dikirim')->where('status_pemesanan', 'sampai')->get();
+        $order = Order::with('detail.product')->where('user_id', $userid)->where('status', 'Paid')
+            ->get();
         // dd($order);
         return view('home.history', compact('order'));
     }

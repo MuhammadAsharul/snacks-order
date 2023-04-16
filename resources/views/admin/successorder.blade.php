@@ -5,7 +5,29 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span>Success Order</h4>
         <div class="card">
             <h5 class="card-header">Order Success Information</h5>
-            <div class="my-2 mx-3"><a class="btn btn-primary" href="{{ route('exportsuccess') }}">Export PDF</a></div>
+            <div class="d-flex justify-content-between">
+                {{-- <div class="my-2 mx-3 col-8"><a class="btn btn-primary" href="{{ route('exportsuccess') }}">Export PDF</a>
+                </div> --}}
+                <div class="d-flex align-items-center mx-3">
+                    <div class="form-group">
+                        <form action="{{ route('successorder') }}" method="get">
+                            <div class="input-group">
+                                <select name="date_filter" id="" class="form-select">
+                                    <option value="">All Date</option>
+                                    <option value="today">Today</option>
+                                    <option value="this_week">This Week</option>
+                                    <option value="last_week">Last Week</option>
+                                    <option value="this_month">This Month</option>
+                                    <option value="last_month">Last Month</option>
+                                    <option value="this_year">This Year</option>
+                                    <option value="last_year">Last Year</option>
+                                </select>
+                                <button class="btn btn-primary" type="submit">Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive text-nowrap">
                 @if ($message = Session::get('message'))
                     <div class="mx-2 alert alert-success vw-100">

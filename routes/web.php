@@ -83,7 +83,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/success-orders', 'Success')->name('successorder');
         Route::get('/admin/edit/status/{id}', 'EditStatus')->name('editstatus');
         Route::post('/admin/update-status', 'UpdateStatus')->name('updatestatus');
-        Route::get('/export-pdf', 'ExportSuccess')->name('exportsuccess');
+        // Route::get('/export-pdf', 'ExportSuccess')->name('exportsuccess');
+        Route::get('/cetak-order-form', 'cetakForm')->name('cetak-order-form');
+        Route::get('/cetak-order-bydate/{tglawal}/{tglakhir}', 'cetakOrderPertanggal')->name('cetak-order-bydate');
+        Route::get('/cetak-product-form', 'cetakProduct')->name('cetak-product-form');
+        Route::get('/cetak-product-bydate/{tglawal}/{tglakhir}', 'cetakProductPertanggal')->name('cetak-product-bydate');
     });
 });
 

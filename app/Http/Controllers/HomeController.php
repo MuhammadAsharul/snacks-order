@@ -11,10 +11,11 @@ class HomeController extends Controller
 {
     public function Index()
     {
-        // $products = Product::paginate(4);
-        $topSeller = OrderDetails::with('product')->orderBy('quantity', 'DESC')->paginate(4);
-        // dd($topSeller);
-        // return view('home.home', compact('products'));
-        return view('home.home', compact('topSeller'));
+        // $topSeller = OrderDetails::with('product')->orderBy('quantity', 'DESC')->paginate(4);
+        $top = OrderDetails::with('product')->groupBy('product_id')
+            ->selectRaw('product_id, SUM(quantity) as total_quantity')
+            ->orderByDesc('total_quantity')
+            ->get();
+        return view('home.home', compact('top'));
     }
 }
