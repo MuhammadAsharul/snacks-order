@@ -10,6 +10,7 @@
                         <th>Product</th>
                         <th>Status Pesanan</th>
                         <th>Total</th>
+                        <th>Tanggal Pembelian</th>
                         <th>Invoice</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                             <td>{{ $o->status_pemesanan }}</td>
                             {{-- <td class="fw-light">{{ $o->price }} </td> --}}
                             <td class="fw-light">@currency($o->total_harga) </td>
+                            <td class="fw-light">{{ $o->created_at->format('d-m-Y') }} </td>
                             <td class="fw-light">
                                 <a class="btn btn-primary" href="{{ route('invoice', $o->id) }}">PDF</a>
                             </td>

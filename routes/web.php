@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\OrderController;
@@ -23,7 +24,6 @@ use App\Http\Controllers\Admin\DashboardController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'Index')->name('Home');
 });

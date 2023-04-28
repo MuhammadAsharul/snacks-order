@@ -6,6 +6,18 @@
         <div class="card">
             <h5 class="card-header">Dashboard Information</h5>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-6 p-3 box-border">
+                <div class="card ">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6 p-3 box-border">
+                <div class="card p-2">
+                    <canvas id="myProduct"></canvas>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12 col-md-12 order-1 mt-3">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-6 mb-4">
@@ -32,8 +44,11 @@
                                         alt="Credit Card" class="rounded" />
                                 </div>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Category Snack</span>
-                            <h3 class="card-title text-nowrap mb-1">{{ $category }}</h3>
+
+                            <p><span class="fw-semibold mb-1">Top Produk -></span>
+                                {{ $pro->product->name }}
+                            </p>
+                            <h3 class="card-title text-nowrap mb-1">{{ $pro->total_quantity }}</h3>
                             {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                         </div>
                     </div>
@@ -149,3 +164,63 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+    {{-- penjualan pertanggal --}}
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode(array_column($chartData, 0)) !!},
+                datasets: [{
+                    label: 'Total Penjualan',
+                    data: {!! json_encode(array_column($chartData, 1)) !!},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'day',
+                            displayFormats: {
+                                day: 'DD/MM/YYYY'
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function(value, index, values) {
+                                return 'Rp. ' + value.toLocaleString('id-ID');
+                            }
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    {{-- produk terjual terbanyak --}}
+    <script>
+        var ctx = document.getElementById('myProduct');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {!! json_encode($chartProduct) !!},
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+@endpush

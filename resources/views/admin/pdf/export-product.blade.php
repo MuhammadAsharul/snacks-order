@@ -42,6 +42,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="header" style="margin-top: 20px; ">
             <h1 style="text-align: center;">Rekap Product</h1>
+
         </div>
         <div class="details">
             Karanggeneng, Boyolali<br>
@@ -66,7 +67,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $so->product->name }}</td>
                                 <td>{{ $so->product->price }}</td>
-                                <td>{{ $so->total_quantity }}</td>
+                                <td>{{ $so->quantity }}</td>
                             </tr>
                         @empty
                             <div class="mx-2 alert alert-danger">

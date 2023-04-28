@@ -100,9 +100,8 @@ class OrderController extends Controller
     public function cetakProductPertanggal($tglawal, $tglakhir)
     {
         // dd(["Tanggal Awal : " . $tglawal, ' Tanggal Akhir : ' . $tglakhir]);
-        $pro = OrderDetails::with('product')->groupBy('product_id')
-            ->selectRaw('product_id, SUM(quantity) as total_quantity')
-            ->orderByDesc('total_quantity')->whereBetween('created_at', [$tglawal, $tglakhir])->get();
+        $pro = OrderDetails::with('product')
+            ->orderByDesc('quantity')->whereBetween('created_at', [$tglawal, $tglakhir])->get();
         return view('admin.pdf.export-product', compact('pro'));
     }
 }

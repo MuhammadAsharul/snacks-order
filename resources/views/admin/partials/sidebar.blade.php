@@ -42,11 +42,6 @@
                         <div data-i18n="Notifications">Add Category</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
-                        <div data-i18n="Connections">Edit Category</div>
-                    </a>
-                </li>
             </ul>
         </li>
         <!-- Product -->
@@ -70,11 +65,7 @@
                         <div data-i18n="Toasts">Add Product</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="ui-tooltips-popovers.html" class="menu-link">
-                        <div data-i18n="Tooltips & Popovers">Edit Product</div>
-                    </a>
-                </li>
+
             </ul>
         </li>
         <!-- Order -->

@@ -39,7 +39,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="short">Short Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="short_description" id="" cols="125" rows="10">{{ $product->short_description }}</textarea>
+                                    <textarea class="form-control" name="short_description" id="editor" cols="125" rows="10">{{ $product->short_description }}</textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -60,3 +60,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+@endpush
