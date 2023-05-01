@@ -46,9 +46,9 @@
                             </div>
 
                             <p><span class="fw-semibold mb-1">Top Produk -></span>
-                                {{ $pro->product->name }}
+                                {{ $pro->product->name ?? '' }}
                             </p>
-                            <h3 class="card-title text-nowrap mb-1">{{ $pro->total_quantity }}</h3>
+                            <h3 class="card-title text-nowrap mb-1">{{ $pro->total_quantity ?? '' }}</h3>
                             {{-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                         </div>
                     </div>
@@ -188,9 +188,9 @@
                     xAxes: [{
                         type: 'time',
                         time: {
-                            unit: 'day',
+                            unit: 'month',
                             displayFormats: {
-                                day: 'DD/MM/YYYY'
+                                month: 'MM/YYYY'
                             }
                         }
                     }],
@@ -215,8 +215,20 @@
             options: {
                 scales: {
                     xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            displayFormats: {
+                                month: 'MMM YYYY'
+                            }
+                        }
+                    }],
+                    yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            callback: function(value, index, values) {
+                                return 'Rp. ' + value.toLocaleString('id-ID');
+                            }
                         }
                     }]
                 }
