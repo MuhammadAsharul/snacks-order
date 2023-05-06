@@ -10,8 +10,8 @@
                 </div> --}}
                 <div class="d-flex align-items-center mx-3">
                     <div class="form-group">
-                        <form action="{{ route('successorder') }}" method="get">
-                            <div class="input-group">
+                        {{-- <form action="{{ route('successorder') }}" method="get">
+                            <div class="input-group mb-2">
                                 <select name="date_filter" id="" class="form-select">
                                     <option value="">All Date</option>
                                     <option value="today">Today</option>
@@ -23,6 +23,21 @@
                                     <option value="last_year">Last Year</option>
                                 </select>
                                 <button class="btn btn-primary" type="submit">Filter</button>
+                            </div>
+                        </form> --}}
+                        <form action="{{ route('filter') }}" method="get">
+                            <div class="row my-3">
+                                <div class="col-md-5">
+                                    <label for="start_date">Start Date</label>
+                                    <input type="date" name="start_date" id="" class="form-control">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="start_date">End Date</label>
+                                    <input type="date" name="end_date" id="" class="form-control">
+                                </div>
+                                <div class="col-md-1 pt-4">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
                             </div>
                         </form>
                     </div>

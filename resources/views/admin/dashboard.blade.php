@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-6 p-3 box-border">
-                <div class="card ">
+                <div class="card p-2">
                     <canvas id="myChart"></canvas>
                 </div>
             </div>

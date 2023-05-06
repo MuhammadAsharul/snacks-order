@@ -104,4 +104,13 @@ class OrderController extends Controller
             ->orderByDesc('quantity')->whereBetween('created_at', [$tglawal, $tglakhir])->get();
         return view('admin.pdf.export-product', compact('pro'));
     }
+
+    public function filter(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $sukses = Order::whereBetween('created_at', [$start_date, $end_date])
+            ->get();
+        return view('admin.successorder', compact('sukses'));
+    }
 }

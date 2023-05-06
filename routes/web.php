@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\FilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/delete-category/{id}', 'DeleteCategory')->name('deletecategory');
     });
     Route::controller(OrderController::class)->group(function () {
+
         Route::get('/admin/pending-orders', 'Pending')->name('pendingorder');
         Route::get('/admin/success-orders', 'Success')->name('successorder');
         Route::get('/admin/edit/status/{id}', 'EditStatus')->name('editstatus');
@@ -89,6 +91,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/cetak-product-form', 'cetakProduct')->name('cetak-product-form');
         Route::get('/cetak-product-bydate/{tglawal}/{tglakhir}', 'cetakProductPertanggal')->name('cetak-product-bydate');
     });
+    Route::get('/filter', [OrderController::class, 'filter'])->name('filter');
 });
 
 // Route::get('/dashboard', function () {
