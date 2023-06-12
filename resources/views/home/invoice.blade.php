@@ -83,13 +83,21 @@
             font-size: 12px;
             color: #999;
         }
+
+        .center {
+            display: block;
+            margin: auto;
+            /* width: 50%; */
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="header" style="margin-top: 20px; ">
-            <h1 style="text-align: center;">Invoice</h1>
+        <div class="header" style="margin-top: 20px; text-align: center ">
+            <img class="" src="dashboard/assets/img/favicon/logo.png" alt="">
+            <h1>Invoice</h1>
+            <hr>
         </div>
         <div class="details">
             Karanggeneng, Boyolali<br>
@@ -146,6 +154,12 @@
             @endforeach
             Total: <span style="color: green">@currency($data->total_harga)</span>
         </div>
+    </div>
+    <div class="" style="text-align: right">
+        <h4>Tertanda Tangan</h4>
+        <img src="dashboard/assets/img/ttd.png" alt="" width="10%">
+        <br>
+        <h4>Bu Ning </h4>
     </div>
 </body>
 

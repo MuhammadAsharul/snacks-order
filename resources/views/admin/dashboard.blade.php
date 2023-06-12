@@ -172,7 +172,7 @@
     <script>
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: {!! json_encode(array_column($chartData, 0)) !!},
                 datasets: [{
@@ -210,7 +210,7 @@
     <script>
         var ctx = document.getElementById('myProduct');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {!! json_encode($chartProduct) !!},
             options: {
                 scales: {
