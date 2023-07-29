@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ URL::asset('home/css/style.css') }}" type="text/css">
 </head>
 
-<body>
+<body class="m-0 p-0 min-h-screen">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -54,7 +54,7 @@
     <div class="container">
         <marquee behavior="" direction="left" style="background-color: #22223c;"><span
                 style="color:white;text-transform: uppercase">Pemesanan
-                Hanya Dilayani Untuk Wilayah Boyolali || Harap melakukan pemesanan H-2</span>
+                Hanya Dilayani Untuk Wilayah Boyolali , Harap melakukan pemesanan H-2</span>
         </marquee>
         @yield('content')
     </div>

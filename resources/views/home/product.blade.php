@@ -53,7 +53,7 @@
                             <div class="product-quantity">
                                 <input type="hidden" name="price" value="{{ $product->price }}">
                                 <div class="pro-qty">
-                                    <input type="number" name="quantity" min="1" placeholder="1">
+                                    <input type="number" name="quantity" min="1" placeholder="0">
                                 </div>
                             </div>
                             <input class="primary-btn pc-btn" type="submit" value="Add To Cart">

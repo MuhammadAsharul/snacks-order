@@ -36,10 +36,11 @@ class DashboardController extends Controller
             ->get();
 
         // total penjualan
-        $data = OrderDetails::select([DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('SUM(quantity) as total')])
+        $data = OrderDetails::select([DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('SUM(quantity) as total'),])
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
+            ->orderByDesc('month')
+
             ->whereBetween('created_at', [Carbon::now()->subMonths(12), Carbon::now()])
             ->get();
 
@@ -74,5 +75,13 @@ class DashboardController extends Controller
         }
 
         return view('admin.dashboard', compact('chartProduct', 'chartData', 'product', 'user', 'order', 'total', 'pro', 'latest', 'top'));
+    }
+    private function getMonthName($month)
+    {
+        $monthNames = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        return $monthNames[$month - 1];
     }
 }

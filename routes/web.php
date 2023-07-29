@@ -33,12 +33,12 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/category', 'AllCategoryPage')->name('allcategory');
     Route::get('/category/{id}/{slug}', 'CategoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'SingleProduct')->name('singleproduct');
-    Route::get('/user-profile', 'UserProfile')->name('userprofile');
     Route::get('/invoice/{id}', 'Invoice')->name('invoice');
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
+        Route::get('/user-profile', 'UserProfile')->name('userprofile');
         Route::get('/add-to-cart', 'AddToCart')->name('addtocart');
         Route::post('/add-product-to-cart', 'AddProductToCart')->name('addproducttocart');
         Route::get('/shipping-address', 'GetShippingAddress')->name('shippingaddress');

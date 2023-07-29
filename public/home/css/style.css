@@ -300,7 +300,7 @@ ol {
     color: #1e1e1e;
     width: 18px;
     height: 18px;
-    border: 2px solid #d0d7db;
+    /* border: 2px solid #d0d7db; */
     background: #fff;
     display: inline-block;
     line-height: 15px;
@@ -308,7 +308,7 @@ ol {
     border-radius: 50%;
     font-weight: 600;
     position: absolute;
-    left: -9px;
+    left: -5px;
     top: 14px;
 }
 

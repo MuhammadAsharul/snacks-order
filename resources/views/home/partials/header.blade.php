@@ -8,15 +8,21 @@
                 <a href="/"><img src="{{ asset('dashboard/assets/img/favicon/logo.png') }}" alt=""></a>
             </div>
             <div class="header-right">
-                <a href="{{ route('userprofile') }}" class="mx-4">
-                    <img src="{{ asset('home/img/icons/man.png') }}" alt="Account">
-                    <span class="mt-3">Account</span>
-                </a>
-                <a href="{{ route('addtocart') }}">
-                    <img src="{{ asset('home/img/icons/bag.png') }}" alt="Keranjang">
-                    <span class="mt-3">Cart</span>
-                </a>
-            </div>
+                @if (Route::has('login'))
+                    @auth
+                        @if (Auth::user()->name != 'Admin')
+                            <a href="{{ route('userprofile') }}" class="mx-4">
+                                <img src="{{ asset('home/img/icons/man.png') }}" alt="Account">
+                                <span class="mt-3">Account</span>
+                            </a>
+                            <a href="{{ route('addtocart') }}">
+                                <img src="{{ asset('home/img/icons/bag.png') }}" alt="Keranjang">
+                                <span class="mt-3">Cart</span>
+                            </a>
+                        @endif
+                </div>
+            @endauth
+            @endif
 
             <nav class="main-menu mobile-menu">
                 <ul>

@@ -175,7 +175,8 @@ class ClientController extends Controller
     }
     public function PendingOrders()
     {
-        $order = Order::with('detail')->where('status', 'Unpaid')->get();
+        $userid = Auth::id();
+        $order = Order::with('detail')->where('status', 'Unpaid')->where('user_id', $userid)->get();
         return view('home.pendingorders', compact('order'));
     }
     public function History()
