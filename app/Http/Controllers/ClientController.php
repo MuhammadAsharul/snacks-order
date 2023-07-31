@@ -50,13 +50,27 @@ class ClientController extends Controller
         $product_price = $request->price;
         $quantity = $request->quantity;
         $total_price = $product_price * $quantity;
-        Cart::create([
-            'product_id' => $request->product_id,
-            'user_id' => Auth::id(),
-            'quantity' => $request->quantity,
-            'price' => $total_price,
-        ]);
-        return redirect()->route('addtocart')->with('message', 'Your Item added to Cart Successfully');
+
+        $existingCartItem = Cart::where('user_id', Auth::id())
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if ($existingCartItem) {
+            // If the product already exists in the cart, update its quantity and price
+            $existingCartItem->update([
+                'quantity' => $existingCartItem->quantity + $request->quantity,
+                'price' => $existingCartItem->price + $total_price,
+            ]);
+            return redirect()->route('addtocart')->with('message', 'Your Item added to Cart Successfully');
+        } else {
+            Cart::create([
+                'product_id' => $request->product_id,
+                'user_id' => Auth::id(),
+                'quantity' => $request->quantity,
+                'price' => $total_price,
+            ]);
+            return redirect()->route('addtocart')->with('message', 'Your Item added to Cart Successfully');
+        }
     }
     public function RemoveCartItem($id)
     {

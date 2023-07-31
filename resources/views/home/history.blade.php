@@ -39,7 +39,7 @@
                         @endphp
                     @empty
                         <div class="alert alert-danger">
-                            Data Product belum Tersedia.
+                            Data Transaksi belum Tersedia.
                         </div>
                     @endforelse
                 </tbody>

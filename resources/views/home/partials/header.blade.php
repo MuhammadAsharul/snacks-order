@@ -17,7 +17,7 @@
                             </a>
                             <a href="{{ route('addtocart') }}">
                                 <img src="{{ asset('home/img/icons/bag.png') }}" alt="Keranjang">
-                                <span class="mt-3">Cart</span>
+                                <span class="mt-3 mx-2">Cart</span>
                             </a>
                         @endif
                 </div>
