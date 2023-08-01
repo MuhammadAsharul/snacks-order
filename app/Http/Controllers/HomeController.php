@@ -14,7 +14,7 @@ class HomeController extends Controller
         // $topSeller = OrderDetails::with('product')->orderBy('quantity', 'DESC')->paginate(4);
         $top = OrderDetails::with('product')->groupBy('product_id')
             ->selectRaw('product_id, SUM(quantity) as total_quantity')
-            ->orderByDesc('total_quantity')
+            ->orderByDesc('total_quantity')->take(4)
             ->get();
         return view('home.home', compact('top'));
     }

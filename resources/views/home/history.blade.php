@@ -1,6 +1,7 @@
 @extends('home.layouts.profile')
 @section('title', 'User Profile')
 @section('profilecontent')
+    <p>Success Orders</p>
     <div class="total-info">
         <div class="total-table">
             <table>

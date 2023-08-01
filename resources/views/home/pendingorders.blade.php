@@ -7,7 +7,6 @@
             {{ $message }}
         </div>
     @endif
-
     <div class="total-info">
         <div class="total-table">
             <table>

@@ -11,7 +11,7 @@
                 </div>
                 <div class="product-content order-table">
                     <ul class="p-info row text-center py-2">
-                        <li><a href="{{ route('userprofile') }}">
+                        <li clas><a href="{{ route('userprofile') }}">
                                 Dashboard
                             </a> </li>
                         <li><a href="{{ route('pendingorders') }}">

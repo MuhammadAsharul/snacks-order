@@ -73,6 +73,7 @@
     <script src="{{ URL::asset('home/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ URL::asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ URL::asset('home/js/main.js') }}"></script>
+
     @stack('scripts')
 </body>
 
