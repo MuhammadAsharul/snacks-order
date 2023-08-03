@@ -21,7 +21,7 @@
                     @endphp
                     @forelse ($order as $o)
                         <tr>
-                            <td class="fw-light">{{ $o->invoice }}</td>
+                            <td class="">{{ $o->invoice }}</td>
                             <td class="fw-light">
                                 @foreach ($o->detail as $item)
                                     <li style="list-style: none;"> {{ $item->product->name }}</li>

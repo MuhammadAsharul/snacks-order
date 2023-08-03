@@ -17,14 +17,9 @@
                         <th>Phone Number</th>
                         <th>Quantity</th>
                         <th>Address</th>
-                        {{-- <th>Shipping</th>
-            <th class="total-cart">Total Cart</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @php
-                        $total = 0;
-                    @endphp --}}
                     @forelse ($order as $o)
                         @foreach ($o->detail as $detail)
                             <tr>
