@@ -45,11 +45,11 @@
                         </div>
                         <div class="cart-item">
                             <span>Tanggal Pemesanan</span>
-                            <p>{{ $shipping_address->tgl_pemesanan }}</p>
+                            <p>{{ $order->tgl_pemesanan }}</p>
                         </div>
                         <div class="cart-item">
                             <span>Note</span>
-                            <p>{{ $shipping_address->note }}</p>
+                            <p>{{ $order->note }}</p>
                         </div>
                     </div>
                     <div>

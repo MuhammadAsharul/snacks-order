@@ -1,14 +1,17 @@
 @extends('home.layouts.app')
-@section('title', 'Checkout')
+@section('title', 'New ShippingAddress')
 @section('content')
     <!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="page-breadcrumb">
-                        <h2>User Shipping Detail<span>.</span></h2>
+                        <h2>Checkout<span>.</span></h2>
                     </div>
+                </div>
+                <div class="col-lg-8">
+                    <img src="img/add.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -16,23 +19,20 @@
     <!-- Page Add Section End -->
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
-        <div class="container mb-5 py-5 ">
-            <form action="{{ route('addshippingaddress') }}" class="checkout-form" method="POST">
+        <div class="container mb-5 py-5">
+            <form action="{{ route('newshippingaddress') }}" class="checkout-form" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>Provide Your Shipping Information</h3>
+                        <h3>New Shipping Information</h3>
                     </div>
-                    <div class="col-lg-9 ">
-                        <a href="{{ route('newshippingaddress') }}" class="btn btn-primary left-0 mb-3">Add New Shipping
-                            Address</a>
+                    <div class="col-lg-9 -mt-10">
                         <div class="row">
                             <div class="col-lg-2">
                                 <p class="in-name">Phone Number*</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="phone_number" class="text-2xl"
-                                    value="{{ $shipping_address->phone_number }}" disabled>
+                                <input type="text" name="phone_number">
                             </div>
                         </div>
                         <div class="row">
@@ -40,7 +40,7 @@
                                 <p class="in-name">City*</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="city" value="{{ $shipping_address->city }}" disabled>
+                                <input type="text" name="city">
                             </div>
                         </div>
                         <div class="row">
@@ -48,8 +48,7 @@
                                 <p class="in-name">Post Code/ZIP*</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="postal_code" value="{{ $shipping_address->postal_code }}"
-                                    disabled>
+                                <input type="text" name="postal_code">
                             </div>
                         </div>
                         <div class="row">
@@ -57,11 +56,11 @@
                                 <p class="in-name">Address</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="address" value="{{ $shipping_address->address }}" disabled>
+                                <input type="text" name="address">
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Next" class="btn btn-primary mt-3 mb-3">
+                    <input type="submit" value="Next" class="btn btn-primary mt-3">
                 </div>
             </form>
         </div>

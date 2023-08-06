@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderDetails;
 use App\Models\ShippingInfo;
+use App\Models\UserShippingDetail;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -79,33 +80,56 @@ class ClientController extends Controller
     }
     public function GetShippingAddress()
     {
-        return view('home.shippingaddress');
+        $userid = Auth::id();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        return view('home.shippingaddress', compact('shipping_address'));
     }
     public function AddShippingAddress(Request $request)
     {
-        ShippingInfo::create([
+        $userid = Auth::id();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        UserShippingDetail::create([
             'user_id' => Auth::id(),
             'phone_number' => $request->phone_number,
             'city' => $request->city,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
-            'tgl_pemesanan' => $request->tgl_pemesanan,
-            'note' => $request->note,
         ]);
-        return redirect()->route('checkout');
+        return redirect()->route('order');
     }
 
+    public function Order(Request $request)
+    {
+        $userid = Auth::id();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        Order::create([
+            'user_id' => Auth::id(),
+            'shipping_phonenumber' => $shipping_address->phone_number,
+            'shipping_city' => $shipping_address->city,
+            'shipping_postalcode' => $shipping_address->postal_code,
+            'shipping_address' => $shipping_address->address,
+            'shipping_tglpemesanan' => $shipping_address->address,
+            'shipping_address' => $shipping_address->address,
+            'tglpemesanan' => $request->tglpemesanan,
+            'note' => $request->note,
+        ]);
+        return redirect()->route('order');
+    }
+
+    // menampilkan ulang pesannan
     public function Checkout()
     {
         $userid = Auth::id();
         $cart_items = Cart::where('user_id', $userid)->get();
-        $shipping_address = ShippingInfo::where('user_id', $userid)->first();
-        return view('home.checkout', compact('cart_items', 'shipping_address'));
+        $order = Order::where('user_id', $userid)->first();
+        return view('home.checkout', compact('cart_items', 'order'));
     }
+
+    // memasukkan ke order
     public function PlaceOrder()
     {
         $userid = Auth::id();
-        $shipping_address = ShippingInfo::where('user_id', $userid)->first();
+        $order = Order::where('user_id', $userid)->first();
         $cart_items = Cart::where('user_id', $userid)->get();
         $total = 0;
         foreach ($cart_items as $cart) {
@@ -114,12 +138,6 @@ class ClientController extends Controller
         }
         $order = Order::create([
             'user_id' => $userid,
-            'shipping_phonenumber' => $shipping_address->phone_number,
-            'shipping_city' => $shipping_address->city,
-            'shipping_postalcode' => $shipping_address->postal_code,
-            'shipping_address' => $shipping_address->address,
-            'shipping_tglpemesanan' => $shipping_address->tgl_pemesanan,
-            'shipping_note' => $shipping_address->note,
             'total_harga' => $total,
             'invoice' =>  'INV-' . mt_rand(100000, 999999),
             'status_pemesanan' => 'menunggu',
@@ -158,7 +176,7 @@ class ClientController extends Controller
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $order->snapToken = $snapToken;
         $order->save();
-        ShippingInfo::where('user_id', $userid)->first()->delete();
+        UserShippingDetail::where('user_id', $userid)->first()->delete();
         return redirect()->route('pendingorders')->with('success', 'Your Order Has Been Placed Succesfully');
     }
 

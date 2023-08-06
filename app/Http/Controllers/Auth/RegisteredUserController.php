@@ -36,6 +36,12 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // 'phone_number' => [
+            //     'required',
+            //     'string',
+            //     'unique:users',
+            //     'phone_indonesia',
+            // ]
         ]);
 
         $user = User::create([
@@ -43,8 +49,9 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
         UserShippingDetail::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'phone_number' => $request->phone_number,
             'city' => $request->city,
             'postal_code' => $request->postal_code,

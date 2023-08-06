@@ -18,7 +18,7 @@
     </section>
     <!-- Page Add Section End -->
     <!-- Product Page Section Beign -->
-    <section class="product-page mt-5">
+    <section class="product-page mt-3 mb-5">
         <div class="container flex">
             <div class="row">
                 <div class="col-lg-6">

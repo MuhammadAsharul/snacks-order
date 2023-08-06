@@ -12,11 +12,7 @@
                         <a class="active" href="#">Snack {{ $category->name }}</a>
                     </div>
                 </div>
-                {{-- <div class="col-lg-8">
-                    <img src="{{ asset('home/img/add.jpg') }}" alt="">
-                </div> --}}
             </div>
-        </div>
     </section>
     <!-- Page Add Section End -->
 

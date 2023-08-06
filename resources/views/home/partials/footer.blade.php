@@ -1,5 +1,5 @@
-<footer class="footer-section mt-5">
-    <div class="container text-center py-3">
+<footer class="footer-section bottom-0">
+    <div class="text-center py-3">
         <p>
             Copyright &copy;
             <script>

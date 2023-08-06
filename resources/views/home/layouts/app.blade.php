@@ -52,8 +52,8 @@
 
 
     <div class="container">
-        <marquee behavior="" direction="left" style="background-color: #22223c;"><span
-                style="color:white;text-transform: uppercase">Pemesanan
+        <marquee behavior="" class="py-2" direction="left" style="background-color: #22223c;"><span
+                style="color:white;text-transform: uppercase;">Pemesanan
                 Hanya Dilayani Untuk Wilayah Boyolali , Harap melakukan pemesanan H-2</span>
         </marquee>
         @yield('content')

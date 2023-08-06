@@ -917,7 +917,6 @@ Search Bar
 
 .footer-section {
     background: #262626;
-    padding-bottom: 0;
 }
 
 .newslatter-form {
@@ -1058,12 +1057,12 @@ Search Bar
 -----------------------*/
 
 .page-add {
-    padding-top: 31px;
+    padding-top: 20px;
     /* margin-bottom: 92px; */
 }
 
 .page-add .page-breadcrumb {
-    padding-top: 34px;
+    padding-top: 10px;
 }
 
 .page-add .page-breadcrumb h2 {
@@ -1452,7 +1451,7 @@ Search Bar
 -----------------------*/
 
 .page-add.cart-page-add {
-    margin-bottom: 34px;
+    /* margin-bottom: 10px; */
 }
 
 .cart-table {
@@ -1763,7 +1762,7 @@ Search Bar
 
 .checkout-form h3 {
     color: #1e1e1e;
-    margin-bottom: 75px;
+    margin-bottom: 25px;
     padding-bottom: 14px;
     border-bottom: 2px solid #d0d7db;
 }

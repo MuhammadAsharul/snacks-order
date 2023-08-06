@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::paginate(5);
+        $product = Product::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.product', compact('product'));
     }
     public function AddProduct()
@@ -78,7 +78,6 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'short_description' => 'required',
-            'long_description' => 'required',
         ]);
         Product::findOrFail($product)->update([
             'name' => $request->name,
