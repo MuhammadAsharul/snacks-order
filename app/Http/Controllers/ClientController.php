@@ -84,21 +84,27 @@ class ClientController extends Controller
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
         return view('home.shippingaddress', compact('shipping_address'));
     }
-    public function AddShippingAddress(Request $request)
+    public function AddShippingAddress()
     {
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
         UserShippingDetail::create([
             'user_id' => Auth::id(),
-            'phone_number' => $request->phone_number,
-            'city' => $request->city,
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
+            'phone_number' => $shipping_address->phone_number,
+            'city' => $shipping_address->city,
+            'postal_code' => $shipping_address->postal_code,
+            'address' => $shipping_address->address,
         ]);
-        return redirect()->route('order');
+        return view('home.order');
     }
 
-    public function Order(Request $request)
+    public function Order()
+    {
+        $userid = Auth::id();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        return view('home.order', compact('shipping_address'));
+    }
+    public function OrderSuccess(Request $request)
     {
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
@@ -113,7 +119,7 @@ class ClientController extends Controller
             'tglpemesanan' => $request->tglpemesanan,
             'note' => $request->note,
         ]);
-        return redirect()->route('order');
+        return redirect()->route('checkout');
     }
 
     // menampilkan ulang pesannan

@@ -20,7 +20,7 @@
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
         <div class="container py-5 mb-5">
-            <form action="{{ route('order') }}" class="checkout-form" method="POST">
+            <form action="{{ route('ordersuccess') }}" class="checkout-form" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-lg-12">
@@ -32,7 +32,7 @@
                                 <p class="in-name">Tanggal Pemesanan</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="datetime-local" name="tgl_pemesanan">
+                                <input type="datetime-local" name="tglpemesanan">
                             </div>
                         </div>
                         <div class="row">

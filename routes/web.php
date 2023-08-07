@@ -43,8 +43,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/add-product-to-cart', 'AddProductToCart')->name('addproducttocart');
         Route::get('/shipping-address', 'GetShippingAddress')->name('shippingaddress');
         Route::post('/add-shipping-address', 'AddShippingAddress')->name('addshippingaddress');
+
         Route::get('/new-shipping-address', 'NewShippingAddress')->name('newshippingaddress');
+
         Route::get('/order', 'Order')->name('order');
+        Route::post('/order-success', 'OrderSuccess')->name('ordersuccess');
         Route::get('/checkout', 'Checkout')->name('checkout');
         Route::post('/place-order', 'PlaceOrder')->name('placeorder');
 
