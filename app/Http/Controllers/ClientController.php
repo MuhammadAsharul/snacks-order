@@ -108,34 +108,6 @@ class ClientController extends Controller
     {
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
-        Order::create([
-            'user_id' => Auth::id(),
-            'shipping_phonenumber' => $shipping_address->phone_number,
-            'shipping_city' => $shipping_address->city,
-            'shipping_postalcode' => $shipping_address->postal_code,
-            'shipping_address' => $shipping_address->address,
-            'shipping_tglpemesanan' => $shipping_address->address,
-            'shipping_address' => $shipping_address->address,
-            'tglpemesanan' => $request->tglpemesanan,
-            'note' => $request->note,
-        ]);
-        return redirect()->route('checkout');
-    }
-
-    // menampilkan ulang pesannan
-    public function Checkout()
-    {
-        $userid = Auth::id();
-        $cart_items = Cart::where('user_id', $userid)->get();
-        $order = Order::where('user_id', $userid)->first();
-        return view('home.checkout', compact('cart_items', 'order'));
-    }
-
-    // memasukkan ke order
-    public function PlaceOrder()
-    {
-        $userid = Auth::id();
-        $order = Order::where('user_id', $userid)->first();
         $cart_items = Cart::where('user_id', $userid)->get();
         $total = 0;
         foreach ($cart_items as $cart) {
@@ -144,6 +116,14 @@ class ClientController extends Controller
         }
         $order = Order::create([
             'user_id' => $userid,
+            'shipping_phonenumber' => $shipping_address->phone_number,
+            'shipping_city' => $shipping_address->city,
+            'shipping_postalcode' => $shipping_address->postal_code,
+            'shipping_address' => $shipping_address->address,
+            'shipping_tglpemesanan' => $shipping_address->address,
+            'shipping_address' => $shipping_address->address,
+            'tglpemesanan' => $request->tglpemesanan,
+            'note' => $request->note,
             'total_harga' => $total,
             'invoice' =>  'INV-' . mt_rand(100000, 999999),
             'status_pemesanan' => 'menunggu',
@@ -183,16 +163,9 @@ class ClientController extends Controller
         $order->snapToken = $snapToken;
         $order->save();
         UserShippingDetail::where('user_id', $userid)->first()->delete();
+
         return redirect()->route('pendingorders')->with('success', 'Your Order Has Been Placed Succesfully');
     }
-
-
-    // public function PendingTransaction()
-    // {
-    //     $userid = Auth::id();
-    //     $order = Order::with('product')->where('user_id', $userid)->orWhere('status', 'Unpaid')->get();
-    //     return view('home.pendingorders', compact('order'));
-    // }
 
     public function Callback(Request $request)
     {
