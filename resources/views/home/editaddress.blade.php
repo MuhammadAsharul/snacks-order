@@ -1,5 +1,5 @@
 @extends('home.layouts.app')
-@section('title', 'Shipping Address')
+@section('title', 'Edit Address')
 @section('content')
     <!-- Page Add Section Begin -->
     <section class="page-add">
@@ -16,52 +16,45 @@
     <!-- Page Add Section End -->
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
-        <div class="container mb-5 pt-3 ">
-            <form action="{{ route('addshippingaddress') }}" class="checkout-form" method="POST">
+        <div class="container mb-5 py-5 ">
+            <form action="{{ route('updateaddress') }}" class="checkout-form" method="POST">
                 @csrf
-                <div class="row ">
+                <div class="row">
                     <div class="col-lg-12">
-                        <h3>Provide Your Shipping Information</h3>
+                        <h3>Edit Your Shipping Information</h3>
                     </div>
-                    <div class="col-lg-12">
-                        <a href="{{ route('newshippingaddress') }}" class="btn btn-primary left-0 mb-3">Add New Shipping
-                            Address</a>
-                        <div class="col-lg-12 mb-3 mr-5 border border-primary ms-auto">
-                            <a href="{{ route('editaddress', $shipping_address->id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ route('deleteaddress', $shipping_address->id) }}" class="btn btn-danger">Delete</a>
-                        </div>
+                    <div class="col-lg-9 ">
                         <div class="row">
-                            <div class="col-lg-1">
-                                <p class="in-name">Phone*</p>
+                            <div class="col-lg-2">
+                                <p class="in-name">Phone Number*</p>
                             </div>
                             <div class="col-lg-10">
                                 <input type="text" name="phone_number" class="text-2xl"
-                                    value="{{ $shipping_address->phone_number }}" disabled>
+                                    value="{{ $address->phone_number }}">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-2">
                                 <p class="in-name">City*</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="city" value="{{ $shipping_address->city }}" disabled>
+                                <input type="text" name="city" value="{{ $address->city }}">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1">
-                                <p class="in-name">Post Code*</p>
+                            <div class="col-lg-2">
+                                <p class="in-name">Post Code/ZIP*</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="postal_code" value="{{ $shipping_address->postal_code }}"
-                                    disabled>
+                                <input type="text" name="postal_code" value="{{ $address->postal_code }}">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-2">
                                 <p class="in-name">Address</p>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" name="address" value="{{ $shipping_address->address }}" disabled>
+                                <input type="text" name="address" value="{{ $address->address }}">
                             </div>
                         </div>
                     </div>

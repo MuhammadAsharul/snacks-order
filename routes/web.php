@@ -48,8 +48,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
         Route::get('/order', 'Order')->name('order');
         Route::post('/order-success', 'OrderSuccess')->name('ordersuccess');
-        Route::get('/checkout', 'Checkout')->name('checkout');
-        Route::post('/place-order', 'PlaceOrder')->name('placeorder');
+
+        Route::get('/edit/address/{id}', 'EditAddress')->name('editaddress');
+        Route::post('/update-address', 'UpdateAddress')->name('updateaddress');
+        Route::get('/delete-address/{id}', 'DeleteAddress')->name('deleteaddress');
 
 
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');

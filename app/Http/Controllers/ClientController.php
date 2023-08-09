@@ -89,7 +89,7 @@ class ClientController extends Controller
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
         UserShippingDetail::create([
-            'user_id' => Auth::id(),
+            'user_id' => $userid,
             'phone_number' => $shipping_address->phone_number,
             'city' => $shipping_address->city,
             'postal_code' => $shipping_address->postal_code,
@@ -97,6 +97,39 @@ class ClientController extends Controller
         ]);
         return view('home.order');
     }
+
+    public function EditAddress($id)
+    {
+        $address = UserShippingDetail::findOrFail($id);
+        return view('home.editaddress', compact('address'));
+    }
+
+    public function UpdateAddress(Request $request)
+    {
+        $userid = Auth::id();
+        $address_id = $request->address_id;
+        $validated = $request->validate([
+            'phone_number' => 'required',
+            'city' => 'required',
+            'postal_code' => 'required',
+            'address' => 'required',
+        ]);
+        $address = [
+            'user_id' => $userid,
+            'phone_number' => $request->phone_number,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+        ];
+        UserShippingDetail::findOrFail($address_id)->update($address);
+        return redirect()->route('shippingaddress')->with('message', 'Address Updated Successfully');
+    }
+    public function DeleteAddress($id)
+    {
+        UserShippingDetail::findOrFail($id)->delete();
+        return redirect()->route('shippingaddress')->with('message', 'Address Deleted Successfully');
+    }
+
 
     public function Order()
     {

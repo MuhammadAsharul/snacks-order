@@ -29,7 +29,7 @@
                     @if (Route::has('login'))
                         @auth
                             <li><a href="/">Home</a></li>
-                            <li><a href="">Product</a>
+                            <li>Product
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('allcategory') }}">All Product</a></li>
                                     @foreach ($categories as $c)
