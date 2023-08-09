@@ -26,7 +26,7 @@
                     <div class="col-lg-12">
                         <a href="{{ route('newshippingaddress') }}" class="btn btn-primary left-0 mb-3">Add New Shipping
                             Address</a>
-                        <div class="col-lg-12 mb-3 mr-5 border border-primary ms-auto">
+                        <div class="col-lg-12 mb-3 d-flex flex-end mr-5 ms-auto">
                             <a href="{{ route('editaddress', $shipping_address->id) }}" class="btn btn-primary">Edit</a>
                             <a href="{{ route('deleteaddress', $shipping_address->id) }}" class="btn btn-danger">Delete</a>
                         </div>

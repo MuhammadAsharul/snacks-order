@@ -1,5 +1,5 @@
 @extends('home.layouts.app')
-@section('title', 'Category')
+@section('title', 'Cart')
 @section('content')
     <!-- Page Add Section Begin -->
     <section class="page-add cart-page-add">

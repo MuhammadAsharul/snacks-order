@@ -19,6 +19,7 @@
         <div class="container mb-5 py-5 ">
             <form action="{{ route('updateaddress') }}" class="checkout-form" method="POST">
                 @csrf
+                <input type="hidden" value="{{ $address->id }}" name="address_id">
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>Edit Your Shipping Information</h3>
