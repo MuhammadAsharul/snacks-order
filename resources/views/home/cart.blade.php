@@ -87,8 +87,8 @@
                                         <a href="#" class="btn btn-primary disabled" disabled>Proceed to
                                             checkout</a>
                                     @else
-                                        <a href="{{ route('shippingaddress') }}" class="btn btn-primary">Proceed to
-                                            Shipping Addrees</a>
+                                        <a href="{{ route('order') }}" class="btn btn-primary">Proceed to
+                                            Order</a>
                                     @endif
                                 </div>
                             </div>

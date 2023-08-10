@@ -82,25 +82,25 @@ class ClientController extends Controller
     {
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->get();
-        return view('home.shippingaddress', compact('shipping_address'));
+        return view('home.order', compact('shipping_address'));
     }
-    public function AddShippingAddress()
-    {
-        $userid = Auth::id();
-        $shipping_address = UserShippingDetail::where('user_id', $userid);
-        UserShippingDetail::create([
-            'user_id' => $userid,
-            'phone_number' => $shipping_address->phone_number,
-            'city' => $shipping_address->city,
-            'postal_code' => $shipping_address->postal_code,
-            'address' => $shipping_address->address,
-        ]);
-        return view('home.order');
-    }
+    // public function AddShippingAddress()
+    // {
+    //     $userid = Auth::id();
+    //     $shipping_address = UserShippingDetail::where('user_id', $userid);
+    //     UserShippingDetail::create([
+    //         'user_id' => $userid,
+    //         'phone_number' => $shipping_address->phone_number,
+    //         'city' => $shipping_address->city,
+    //         'postal_code' => $shipping_address->postal_code,
+    //         'address' => $shipping_address->address,
+    //     ]);
+    //     return view('home.order');
+    // }
 
     public function NewShippingAddress()
     {
-        return view('home.newshippingaddress', compact('shipping_address'));
+        return view('home.newshippingaddress');
     }
     public function StoreAddress(Request $request)
     {
@@ -113,7 +113,7 @@ class ClientController extends Controller
             'address' => $request->address,
         ]);
         // $shipping_address = UserShippingDetail::where('user_id', $userid);
-        // return redirect()->route('shippingaddress');
+        return redirect()->route('order');
     }
 
 
@@ -141,25 +141,28 @@ class ClientController extends Controller
             'address' => $request->address,
         ];
         UserShippingDetail::findOrFail($address_id)->update($address);
-        return redirect()->route('shippingaddress')->with('message', 'Address Updated Successfully');
+        return redirect()->route('order')->with('message', 'Address Updated Successfully');
     }
     public function DeleteAddress($id)
     {
         UserShippingDetail::findOrFail($id)->delete();
-        return redirect()->route('shippingaddress')->with('message', 'Address Deleted Successfully');
+        return redirect()->route('order')->with('message', 'Address Deleted Successfully');
     }
 
 
     public function Order()
     {
         $userid = Auth::id();
-        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
-        return view('home.order', compact('shipping_address'));
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->get();
+        $currentDate = Carbon::now();
+        $minDate = $currentDate->format('Y-m-d H:i:s');
+        return view('home.order', compact('shipping_address', 'minDate'));
     }
     public function OrderSuccess(Request $request)
     {
         $userid = Auth::id();
-        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->where('id', $request->id_address)->get();
+        $shipping_address = $shipping_address[0];
         $cart_items = Cart::where('user_id', $userid)->get();
         $total = 0;
         foreach ($cart_items as $cart) {
@@ -171,8 +174,6 @@ class ClientController extends Controller
             'shipping_phonenumber' => $shipping_address->phone_number,
             'shipping_city' => $shipping_address->city,
             'shipping_postalcode' => $shipping_address->postal_code,
-            'shipping_address' => $shipping_address->address,
-            'shipping_tglpemesanan' => $shipping_address->address,
             'shipping_address' => $shipping_address->address,
             'tglpemesanan' => $request->tglpemesanan,
             'note' => $request->note,
@@ -214,7 +215,6 @@ class ClientController extends Controller
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $order->snapToken = $snapToken;
         $order->save();
-        UserShippingDetail::where('user_id', $userid)->first()->delete();
 
         return redirect()->route('pendingorders')->with('success', 'Your Order Has Been Placed Succesfully');
     }
