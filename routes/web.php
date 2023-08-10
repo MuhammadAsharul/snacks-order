@@ -53,6 +53,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/update-address', 'UpdateAddress')->name('updateaddress');
         Route::get('/delete-address/{id}', 'DeleteAddress')->name('deleteaddress');
 
+        Route::get('/add-new-shipping-address', 'AddNewShippingAddress')->name('addnewshippingaddress');
+        Route::post('/store-addressclear', 'StoreAddress')->name('storeaddress');
+
 
         Route::get('/user-profile/pending-orders', 'PendingOrders')->name('pendingorders');
         Route::get('/user-proflie/history', 'History')->name('history');

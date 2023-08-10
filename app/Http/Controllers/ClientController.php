@@ -98,6 +98,26 @@ class ClientController extends Controller
         return view('home.order');
     }
 
+    public function NewShippingAddress()
+    {
+        $userid = Auth::id();
+        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        return view('home.newshippingaddress', compact('shipping_address'));
+    }
+    public function StoreAddress(Request $request)
+    {
+        $userid = Auth::id();
+        UserShippingDetail::create([
+            'user_id' => $userid,
+            'phone_number' => $request->phone_number,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+        ]);
+        return view('home.newshippingaddress', compact('shipping_address'));
+    }
+
+
     public function EditAddress($id)
     {
         $address = UserShippingDetail::findOrFail($id);
