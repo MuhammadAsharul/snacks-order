@@ -44,7 +44,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/shipping-address', 'GetShippingAddress')->name('shippingaddress');
         Route::post('/add-shipping-address', 'AddShippingAddress')->name('addshippingaddress');
 
-        Route::get('/new-shipping-address', 'NewShippingAddress')->name('newshippingaddress');
+        Route::post('/new-shipping-address', 'NewShippingAddress')->name('newshippingaddress');
 
         Route::get('/order', 'Order')->name('order');
         Route::post('/order-success', 'OrderSuccess')->name('ordersuccess');
@@ -53,7 +53,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/update-address', 'UpdateAddress')->name('updateaddress');
         Route::get('/delete-address/{id}', 'DeleteAddress')->name('deleteaddress');
 
-        Route::get('/add-new-shipping-address', 'AddNewShippingAddress')->name('addnewshippingaddress');
         Route::post('/store-addressclear', 'StoreAddress')->name('storeaddress');
 
 

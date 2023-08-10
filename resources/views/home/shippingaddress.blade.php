@@ -24,12 +24,13 @@
                         <h3>Provide Your Shipping Information</h3>
                     </div>
                     <div class="col-lg-12">
-                        <a href="{{ route('newshippingaddress') }}" class="btn btn-primary left-0 mb-3">Add New Shipping Address</a>
-                        <div class="col-lg-12 mb-3 d-flex flex-row-reverse gap-2 ms-auto">
+                        <a href="{{ route('newshippingaddress') }}" class="btn btn-primary left-0 mb-3">Add New Shipping
+                            Address</a>
+                        {{-- <div class="col-lg-12 mb-3 d-flex flex-row-reverse gap-2 ms-auto">
                             <a href="{{ route('editaddress', $shipping_address->id) }}" class="btn btn-primary">Edit</a>
                             <a href="{{ route('deleteaddress', $shipping_address->id) }}" class="btn btn-danger">Delete</a>
-                        </div>
-                        <div class="row">
+                        </div> --}}
+                        {{-- <div class="row">
                             <div class="col-lg-1">
                                 <p class="in-name">Phone*</p>
                             </div>
@@ -62,27 +63,76 @@
                             <div class="col-lg-10">
                                 <input type="text" name="address" value="{{ $shipping_address->address }}" disabled>
                             </div>
+                        </div> --}}
+                        <div class="col-lg-12">
+                            <p class="">Address</p>
                         </div>
-                        <div class="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1" value="option1">
-                                <label class="form-check-label" for="exampleRadios1">
-                                  alamat 1
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios2" value="option2">
-                                <label class="form-check-label" for="exampleRadios2">
-                                  alamat 2
-                                </label>
-                              </div>
-                        </div>
+                        <div class="row mt-3">
+                            {{-- <div class="col-lg-1">
+                            </div> --}}
+                            <div class="col-lg-10">
+                                @foreach ($shipping_address as $address)
+                                    <div class="form-check w-full d-flex justify-content-between">
+                                        <div>
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios1" value="{{ $address->address }}">
+                                            <label class="form-check-label w-full" for="exampleRadios1">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Phone: {{ $address->phone_number }}
+                                                    </li>
+                                                    <li class="list-group-item">City: {{ $address->city }}</li>
+                                                    <li class="list-group-item">Postal code:
+                                                        {{ $address->postal_code }}</li>
+                                                    <li class="list-group-item">address: {{ $address->address }}</li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center gap-2">
+                                            <a href="{{ route('editaddress', $address->id) }}"
+                                                class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('deleteaddress', $address->id) }}"
+                                                class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                {{-- <div class="form-check w-full d-flex justify-content-between">
+                                    <div>
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios1" value="{{ $shipping_address->address }}">
+                                        <label class="form-check-label w-full" for="exampleRadios1">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">Phone: {{ $shipping_address->phone_number }}
+                                                </li>
+                                                <li class="list-group-item">City: {{ $shipping_address->city }}</li>
+                                                <li class="list-group-item">Postal code:
+                                                    {{ $shipping_address->postal_code }}</li>
+                                                <li class="list-group-item">address: {{ $shipping_address->address }}</li>
+                                            </ul>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center gap-2">
+                                        <a href="{{ route('editaddress', $shipping_address->id) }}"
+                                            class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('deleteaddress', $shipping_address->id) }}"
+                                            class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
+                            </div> --}}
+                            </div>
 
+                        </div>
+                        <input type="submit" value="Next" class="btn btn-primary mt-3 mb-3">
                     </div>
-                    <input type="submit" value="Next" class="btn btn-primary mt-3 mb-3">
-                </div>
             </form>
         </div>
     </section>
     <!-- Cart Total Page End -->
 @endsection
+
+<script>
+    // Output the $shipping_address data to JavaScript
+    var shippingAddressData = @json($shipping_address);
+
+    // Log the data using console.log()
+    console.log(shippingAddressData);
+</script>

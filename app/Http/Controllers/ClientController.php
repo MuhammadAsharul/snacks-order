@@ -81,11 +81,13 @@ class ClientController extends Controller
     public function GetShippingAddress()
     {
         $userid = Auth::id();
-        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+        $shipping_address = UserShippingDetail::where('user_id', $userid);
+        // dd($shipping_address);
         return view('home.shippingaddress', compact('shipping_address'));
     }
-    public function AddShippingAddress()
+    public function AddShippingAddress(Request $request)
     {
+
         $userid = Auth::id();
         $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
         UserShippingDetail::create([
@@ -100,8 +102,7 @@ class ClientController extends Controller
 
     public function NewShippingAddress()
     {
-        $userid = Auth::id();
-        $shipping_address = UserShippingDetail::where('user_id', $userid)->first();
+
         return view('home.newshippingaddress', compact('shipping_address'));
     }
     public function StoreAddress(Request $request)
@@ -114,7 +115,8 @@ class ClientController extends Controller
             'postal_code' => $request->postal_code,
             'address' => $request->address,
         ]);
-        return view('home.newshippingaddress', compact('shipping_address'));
+        // $shipping_address = UserShippingDetail::where('user_id', $userid);
+        return redirect()->route('shippingaddress');
     }
 
 

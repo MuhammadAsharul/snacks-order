@@ -20,15 +20,11 @@
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
         <div class="container mb-5 py-5">
-            <form action="{{ route('newshippingaddress') }}" class="checkout-form" method="POST">
+            <form action="{{ route('storeaddress') }}" class="checkout-form" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>New Shipping Information</h3>
-                    </div>
-                    <div class="col-lg-12 mb-3 d-flex flex-row-reverse gap-2 ms-auto">
-                        <a href="{{ route('editaddress', $shipping_address->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('deleteaddress', $shipping_address->id) }}" class="btn btn-danger">Delete</a>
                     </div>
                     <div class="row">
                         <div class="col-lg-1">
