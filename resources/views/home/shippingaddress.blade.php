@@ -2,7 +2,7 @@
 @section('title', 'Shipping Address')
 @section('content')
     <!-- Page Add Section Begin -->
-    <section class="page-add">
+    <section class="page-add mb-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -15,7 +15,7 @@
     </section>
     <!-- Page Add Section End -->
     <!-- Cart Total Page Begin -->
-    <section class="cart-total-page spad">
+    <section class="cart-total-page spad mb-5">
         <div class="container mb-5 pt-3 ">
             <form action="{{ route('addshippingaddress') }}" class="checkout-form" method="POST">
                 @csrf
@@ -121,7 +121,7 @@
                             </div>
 
                         </div>
-                        <input type="submit" value="Next" class="btn btn-primary mt-3 mb-3">
+                        <input type="submit" value="Next" class="btn btn-primary mt-3 mb-5">
                     </div>
             </form>
         </div>
