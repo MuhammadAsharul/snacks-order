@@ -88,7 +88,7 @@
                                             checkout</a>
                                     @else
                                         <a href="{{ route('shippingaddress') }}" class="btn btn-primary">Proceed to
-                                            Checkout</a>
+                                            Shipping Addrees</a>
                                     @endif
                                 </div>
                             </div>
